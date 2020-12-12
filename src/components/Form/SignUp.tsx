@@ -7,10 +7,10 @@ import { useAuth } from '@hook/useAuth';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import Input from '@components/Input';
 import Button from '@components/Button';
 import translations from '@translations';
+import yup from '@yup';
 
 initializeFirebase();
 const uiConfig: firebaseui.auth.Config = {
@@ -35,14 +35,23 @@ const uiConfig: firebaseui.auth.Config = {
 type FormData = {
   email: string;
   plainPassword: string;
+  plainPasswordConfirm: string;
 };
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   plainPassword: yup.string().required(),
+  plainPasswordConfirm: yup
+    .string()
+    .test('equal', 'Les mots de passe de correspondent pas', function (v) {
+      // Don't use arrow functions
+      const ref = yup.ref('plainPassword');
+      return v !== this.resolve(ref);
+    })
+    .required(),
 });
 
-export const SignInForm: React.FC = () => {
+export const SignUpForm: React.FC = () => {
   const router = useRouter();
   const [error, setError] = useState();
   const { session, signIn, logout } = useAuth();
@@ -90,6 +99,14 @@ export const SignInForm: React.FC = () => {
           error={errors?.plainPassword?.message}
           inputRef={register}
         />
+        <Input
+          label={'Confirmer le mot de passe'}
+          name={'plainPasswordConfirm'}
+          id={'plainPasswordConfirm'}
+          type={'password'}
+          error={errors?.plainPasswordConfirm?.message}
+          inputRef={register}
+        />
 
         {error && <span style={{ color: 'red' }}>{error}</span>}
         <Button disabled={Object.keys(errors).length > 0} type={'submit'}>
@@ -103,4 +120,4 @@ export const SignInForm: React.FC = () => {
   );
 };
 
-export default SignInForm;
+export default SignUpForm;
