@@ -59,7 +59,6 @@ export const SignInForm: React.FC = () => {
 
   const onSubmit = useCallback(
     ({ email, plainPassword }: FormData) => {
-      console.log({ email, plainPassword });
       signIn(email, plainPassword)
         .then((val) => {
           console.log(val);
