@@ -1,2 +1,5 @@
-# Hackathon-2020
-Project for the 2020's Hackathon
+# Comment déployer l'API
+
+## 1. Configuration
+Dupliquer le fichier `.env.dist` puis le renommer `.env`
+
