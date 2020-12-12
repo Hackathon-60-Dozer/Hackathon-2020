@@ -15,12 +15,17 @@ const auth = firebase.auth();
 
 export interface AuthContext {
   session: Session;
-  logout: () => void;
+  logout: (redirect?: boolean) => Promise<void>;
+  signIn: (
+    email: string,
+    plainPassword: string
+  ) => Promise<firebase.auth.UserCredential>;
 }
 
 const initialValue = {
   session: null,
-  logout: null,
+  logout: () => null,
+  signIn: () => null,
 };
 
 export const authContext = createContext<AuthContext>(initialValue);
@@ -35,16 +40,25 @@ export const useAuthProvider = (): AuthContext => {
   const [session, setSession] = useState<Session>(null);
   const router = useRouter();
 
-  const logout = useCallback(async () => {
-    return auth
-      .signOut()
-      .then(() => {
-        router.push('/');
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  }, [router]);
+  const logout = useCallback(
+    async (redirect = true) => {
+      return auth
+        .signOut()
+        .then(() => {
+          if (redirect) router.push('/');
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    },
+    [router]
+  );
+
+  const signIn = useCallback(async (email, plainPassword) => {
+    return await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, plainPassword);
+  }, []);
 
   useEffect(() => {
     // Firebase updates the id token every hour, this
@@ -72,6 +86,7 @@ export const useAuthProvider = (): AuthContext => {
   return {
     session,
     logout,
+    signIn,
   };
 };
 

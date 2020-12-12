@@ -12,8 +12,6 @@ const clientCredentials = {
 };
 
 export function initializeFirebase(): void {
-  console.log(clientCredentials);
-
   if (!firebase.apps.length) {
     firebase.initializeApp(clientCredentials);
   }

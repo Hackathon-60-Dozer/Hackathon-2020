@@ -5,4 +5,12 @@ module.exports = {
   trailingComma: 'es5',
   jsxBracketSameLine: true,
   noSemi: false,
+  overrides: [
+    {
+      files: "src/translations/**/*.ts",
+      options: {
+        singleQuote: false,
+      }
+    }
+  ]
 };
