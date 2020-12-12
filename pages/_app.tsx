@@ -5,6 +5,8 @@ import { ApolloProvider } from '@apollo/client';
 import { APOLLO_STATE_PROP_NAME } from '@services/apollo/client';
 import { useApollo } from '@hook/useApollo';
 
+import '@styles/global.css';
+
 function App({ Component, pageProps }: AppProps): JSX.Element {
   const apolloClient = useApollo(pageProps[APOLLO_STATE_PROP_NAME]);
 

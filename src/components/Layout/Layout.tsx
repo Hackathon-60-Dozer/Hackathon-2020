@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Footer from '@components/Layout/Footer/Footer';
+import Navbar from '@components/Layout/Navbar/Navbar';
 
 import styles from './Layout.module.css';
 
@@ -9,8 +10,9 @@ const Layout: React.FC = ({ children }) => {
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Navbar />
 
       <main className={styles.main}>{children}</main>
 

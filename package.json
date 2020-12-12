@@ -9,11 +9,25 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
+    "algoliasearch": "^4.8.3",
     "deepmerge": "^4.2.2",
+    "firebase": "^8.2.0",
     "graphql": "^15.4.0",
+    "js-cookie": "^2.2.1",
     "next": "10.0.1",
+    "places.js": "^1.19.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-form-hook": "0.0.1",
+    "react-hook-form": "^6.13.0",
+    "react-instantsearch-dom": "^6.8.2",
+    "react-leaflet": "^3.0.2",
+    "react-transition-group": "^4.4.1",
+    "styled-components": "^5.2.1",
+    "yup": "^0.32.8"
   },
   "devDependencies": {
     "@types/next": "^9.0.0",
