@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components'
-import { colors } from "@theme";
+import styled from 'styled-components';
+import Link from 'next/link';
 
 import styles from './Footer.module.css';
+import routes from '@constants/routes';
 
 const Footer: React.FC = () => {
   return (
@@ -10,8 +11,8 @@ const Footer: React.FC = () => {
       <MainContainer>
         <div>
           <h2>Vous êtes un professionnel ?</h2>
-          <a href="">Inscrivez-vous</a>
-          <a href="">Connectez-vous</a>
+          <Link href={routes.signUp.url}>Inscrivez-vous</Link>
+          <Link href={routes.signIn.url}>Connectez-vous</Link>
         </div>
         <div>
           <a href="">A propos de Toulocal</a>
@@ -25,14 +26,13 @@ const Footer: React.FC = () => {
   );
 };
 
-const MainContainer = styled.div `
+const MainContainer = styled.div`
   padding: 30px;
-  background: ${colors.primary};
+  background: ${(props) => props.theme.colors.primary};
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 
   div {
     color: lightcyan;
@@ -41,6 +41,6 @@ const MainContainer = styled.div `
     align-items: flex-start;
     justify-content: center;
   }
-`
+`;
 
 export default Footer;

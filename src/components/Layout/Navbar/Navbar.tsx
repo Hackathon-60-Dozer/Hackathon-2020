@@ -1,24 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faBars, faShoppingBasket, faUserCircle} from '@fortawesome/free-solid-svg-icons';
-import { Transition } from 'react-transition-group';
-import { colors } from "@theme";
+import {
+  faBars,
+  faShoppingBasket,
+  faUserCircle,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Navbar: React.FC = () => {
-
   const [deployed, setDeployed] = useState(false);
 
   return (
     <Wrapper>
-
       <MainContainer>
-
         <FontAwesomeIcon
-          id={"bars"}
+          id={'bars'}
           icon={faBars}
           onClick={() => {
-            setDeployed(!deployed)
+            setDeployed(!deployed);
           }}
         />
 
@@ -26,58 +25,48 @@ const Navbar: React.FC = () => {
           <img src="/static/resources/LOGO1.svg" alt="" />
         </a>
 
-        <div className={"icons-container"}>
+        <div className={'icons-container'}>
           <a href="">
-            <FontAwesomeIcon icon={faUserCircle}/>
+            <FontAwesomeIcon icon={faUserCircle} />
           </a>
           <a href="">
-            <FontAwesomeIcon icon={faShoppingBasket}/>
+            <FontAwesomeIcon icon={faShoppingBasket} />
           </a>
         </div>
-
       </MainContainer>
 
-      <Menu className={deployed ? "deployed" : ""}>
+      <Menu className={deployed ? 'deployed' : ''}>
+        <section>SEARCH BAR</section>
 
-        <section>
-          SEARCH BAR
-        </section>
+        <section>Client</section>
 
-        <section>
-          Client
-        </section>
-
-        <section>
-          Commerçant
-        </section>
-
+        <section>Commerçant</section>
       </Menu>
-
     </Wrapper>
-  )
-}
+  );
+};
 
-const Wrapper = styled.div `
+const Wrapper = styled.div`
   width: 100%;
   position: sticky;
   z-index: 2;
-`
+`;
 
-const Menu = styled.div `
-  color: ${colors.light};
-  width: 100%;
+const Menu = styled.div`
+  color: ${(props) => props.theme.colors.light};
   padding: 20px;
-  z-index: -1;
-  background: ${colors.secondary};
-  position: absolute;
-  transform: translate3d(0,-100%,0);
-  transition: 0.7s;
   padding-bottom: 45px;
+  width: 100%;
+  z-index: -1;
+  background: ${(props) => props.theme.colors.secondary};
+  position: absolute;
+  transform: translate3d(0, -100%, 0);
+  transition: 0.7s;
   display: flex;
   justify-content: space-around;
 
   &.deployed {
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
     padding-bottom: 20px;
   }
 
@@ -87,14 +76,14 @@ const Menu = styled.div `
     justify-content: center;
     align-items: center;
   }
-`
+`;
 
-const MainContainer = styled.div `
-  color: ${colors.primary};
+const MainContainer = styled.div`
+  color: ${(props) => props.theme.colors.primary};
   font-size: 25px;
   height: 100px;
   width: 100%;
-  background: ${colors.light};
+  background: ${(props) => props.theme.colors.light};
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -105,13 +94,13 @@ const MainContainer = styled.div `
   }
 
   #bars {
-    color: ${colors.secondary};
+    color: ${(props) => props.theme.colors.secondary};
     cursor: pointer;
   }
 
   .icons-container svg {
     margin: 9px;
   }
-`
+`;
 
 export default Navbar;
