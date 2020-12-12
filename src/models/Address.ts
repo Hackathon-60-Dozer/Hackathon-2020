@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import {Address, Model} from '@src/types';
+import { Address, Model } from '@src/types';
 
 const AddressSchema = new Schema({
   country: String, // ISO Code

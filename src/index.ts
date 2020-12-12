@@ -10,12 +10,12 @@ import mongoose from 'mongoose';
 import { apolloConfig } from '@src/graphql/schema';
 import * as config from './config';
 import admin from 'firebase-admin';
-import serviceAccount from './config/firebase-credential.json'
+import serviceAccount from './config/firebase-credential.json';
 
 Promise.promisifyAll(mongoose);
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount)
+  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
 });
 
 mongoose.connect(config.db, {

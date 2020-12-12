@@ -27,7 +27,6 @@ export const typeDefs = gql`
     name: String
   }
 
-
   type Address {
     country: String! # ISO Code
     name: String! # Full line name
@@ -50,7 +49,6 @@ export const typeDefs = gql`
     postalCode: String! # Postal Code / ZIP Code
     premise: String! # Apartment / Suite / Box number, etc,
   }
-
 
   type MarketMeta {
     validated: Boolean
@@ -97,7 +95,6 @@ export const typeDefs = gql`
     market: String!
   }
 
-
   type ProductDetails {
     mode: [String]
     allergens: [String]
@@ -137,8 +134,6 @@ export const typeDefs = gql`
     addShop(input: ShopInput!): Shop
     addMarket(input: MarketInput!): Market
     addProduct(market: ID!, input: MarketInput!): Product
-
-
 
     addExample(input: ExampleInput!): Boolean!
     editExample(id: ID!, input: ExampleInput!): Boolean!

@@ -1,4 +1,7 @@
-import { ApolloServerExpressConfig, AuthenticationError } from 'apollo-server-express';
+import {
+  ApolloServerExpressConfig,
+  AuthenticationError,
+} from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import { resolvers } from '../resolvers';
 import * as schemaDirectives from '../directives';
@@ -27,21 +30,19 @@ export const apolloConfig: ApolloServerExpressConfig = {
           case 'Bearer':
             try {
               session = await admin.auth().verifyIdToken(token);
-            } catch(e) {
+            } catch (e) {
               throw new AuthenticationError(e);
             }
             break;
 
           default:
             ctx.res.statusCode = 403;
-            throw new AuthenticationError(
-              'Unsupported authorization scheme'
-            );
+            throw new AuthenticationError('Unsupported authorization scheme');
         }
 
         return {
           ...ctx,
-          session
+          session,
         };
       } else {
         return { ...ctx };

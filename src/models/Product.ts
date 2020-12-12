@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import {Model, Product} from '@src/types';
+import { Model, Product } from '@src/types';
 
 const ProductSchema = new Schema({
   name: String,
@@ -12,7 +12,7 @@ const ProductSchema = new Schema({
   },
   meta: {
     available: Boolean,
-  }
+  },
 });
 
 export default mongoose.model('Product', ProductSchema) as Model<Product>;

@@ -68,32 +68,32 @@ export interface Address {
   premise: string; // Apartment / Suite / Box number, etc,
 }
 
-export type UserId = String /** Reference to user */
-export type Ref<T> = String /** Database beference */
+export type UserId = string; /** Reference to user */
+export type Ref<T> = string; /** Database beference */
 
 export interface Market {
   name: string;
-  address: Address,
+  address: Address;
   shop: Ref<Shop>[];
   meta: {
     validated: boolean;
-  }
+  };
   owner: UserId;
 }
 
-export type Label = String /** Food typr label */
+export type Label = string; /** Food typr label */
 export interface Shop {
   name: string;
   organisation: {
-    name: string
-    siret: name;
-    siege: Address
+    name: string;
+    siret: string;
+    siege: Address;
   };
   owner: {
     uid: UserId;
     firstName: string;
     lastName: string;
-  },
+  };
   labels: Label[];
   market?: Ref<Market>;
   products: Product[];
@@ -102,7 +102,7 @@ export interface Shop {
     useMarketCollectPoint: boolean;
     marketValidated: boolean;
     validated: boolean;
-  }
+  };
 }
 
 export type Unit = 'kilo' | 'liter' | 'piece' | 'lot';
@@ -110,7 +110,7 @@ export type ConsumptionMode = string;
 export type Allergens = string;
 export interface Product {
   name: string;
-  price: Number,
+  price: number;
   unit: Unit;
   details: {
     mode: ConsumptionMode[];
@@ -119,7 +119,7 @@ export interface Product {
   };
   meta: {
     available: boolean;
-  }
+  };
 }
 
 export type PaymentType = 'online' | 'onsite';
@@ -127,7 +127,7 @@ export interface Command {
   user: UserId;
   product: Ref<Product>[];
   collectDate: Date;
-  price: Number;
+  price: number;
   paymentType: PaymentType;
   meta: {
     validated: boolean;

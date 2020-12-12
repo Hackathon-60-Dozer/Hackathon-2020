@@ -1,15 +1,15 @@
 import mongoose, { Schema } from 'mongoose';
-import {Model, Shop} from '@src/types';
-import Product from "@src/models/Product";
-import Command from "@src/models/Command";
-import Address from "@src/models/Address";
+import { Model, Shop } from '@src/types';
+import Product from '@src/models/Product';
+import Command from '@src/models/Command';
+import Address from '@src/models/Address';
 
 const ShopSchema = new Schema({
   name: String,
   organisation: {
     name: String,
     siret: String,
-    siege: Address,
+    siege: Address.schema,
   },
   owner: {
     uid: String,
@@ -18,12 +18,12 @@ const ShopSchema = new Schema({
   },
   label: [String],
   market: { type: Schema.Types.ObjectId, ref: 'Market' },
-  products: [Product],
-  commands: [Command],
+  products: [Product.schema],
+  commands: [Command.schema],
   meta: {
     useMarketCollectPoint: Boolean,
     marketValidated: Boolean,
-    validated: Boolean
+    validated: Boolean,
   },
 });
 
