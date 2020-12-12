@@ -1,12 +1,14 @@
 import React from 'react';
-import { GetStaticProps, NextPage } from 'next';
-import Layout from '@components/Layout';
-
+import { NextPage } from 'next';
+import Layout from '@components/Layout/Layout';
+import SignInForm from '@components/Form/SignIn';
 
 const SignInPage: NextPage = () => {
   return (
     <Layout>
-      
+      <SignInForm />
     </Layout>
-  )
-}
+  );
+};
+
+export default SignInPage;
