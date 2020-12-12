@@ -8,25 +8,6 @@ import { colors } from "@theme";
 const Navbar: React.FC = () => {
 
   const [deployed, setDeployed] = useState(false);
-  const transitionStyles = {
-    entering: { transform: "translate3d(12px, 50%, 3em)" },
-    entered:  { opacity: 1 },
-    exiting:  { opacity: 0 },
-    exited:  { opacity: 0 },
-  };
-
-  const Fade = ({ in: inProp }) => (
-    <Transition in={inProp} timeout={duration}>
-      {state => (
-        <div style={{
-          ...defaultStyle,
-          ...transitionStyles[state]
-        }}>
-          I'm a fade Transition!
-        </div>
-      )}
-    </Transition>
-  );
 
   return (
     <Wrapper>
