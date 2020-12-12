@@ -39,6 +39,17 @@ export const typeDefs = gql`
     postalCode: String! # Postal Code / ZIP Code
     premise: String! # Apartment / Suite / Box number, etc,
   }
+  input AddressInput {
+    country: String! # ISO Code
+    name: String! # Full line name
+    firstname: String!
+    lastname: String!
+    organisationName: String!
+    administrativeArea: String! # State / Province / Region
+    locality: String! # City / Town
+    postalCode: String! # Postal Code / ZIP Code
+    premise: String! # Apartment / Suite / Box number, etc,
+  }
 
 
   type MarketMeta {
@@ -49,6 +60,11 @@ export const typeDefs = gql`
     address: Address!
     shops(_: String): [Shop]!
     meta: MarketMeta!
+    owner: String!
+  }
+  input MarketInput {
+    name: String!
+    address: AddressInput!
     owner: String!
   }
 
@@ -72,6 +88,15 @@ export const typeDefs = gql`
     commands(_: String): [Command]!
     meta: ShopMeta!
   }
+  input ShopInput {
+    name: String!
+    organisationName: String!
+    organisationSiret: String!
+    organisationSiege: AddressInput!
+    labels: [String]!
+    market: String!
+  }
+
 
   type ProductDetails {
     mode: [String]
@@ -109,6 +134,12 @@ export const typeDefs = gql`
   }
 
   type Mutation {
+    addShop(input: ShopInput!): Shop
+    addMarket(input: MarketInput!): Market
+    addProduct(market: ID!, input: MarketInput!): Product
+
+
+
     addExample(input: ExampleInput!): Boolean!
     editExample(id: ID!, input: ExampleInput!): Boolean!
     removeExample(id: ID!): Boolean!

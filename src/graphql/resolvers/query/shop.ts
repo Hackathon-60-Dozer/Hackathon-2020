@@ -1,15 +1,32 @@
-import {Resolver, Example, Shop} from '@src/types';
+import {Resolver, Shop as ShopType, Market, Product, Command} from '@src/types';
 import admin from 'firebase-admin';
+import Shop from "@src/models/Shop";
+import { ApolloError } from 'apollo-server-express';
 
-export const getShop: Resolver<Shop, { id: string }> = async (
+type ShopData = {
+  market: MarketResolver<{}>;
+  products: MarketResolver<{}>;
+  commands: MarketResolver<{}>;
+} & ShopType
+type ShopResolver<T = { id: string }> = Resolver<ShopData, T>
+
+
+export const getShop: ShopResolver = async (
   _,
   { id }
 ) => {
-  console.log(id);
+  let data: ShopData;
 
-  admin.auth().listUsers(5).then(console.log);
+  try {
+    await Shop.findById(id)
+  } catch (e) {
+    throw new ApolloError('This shop does not exist')
+  }
 
-  return {
-
-  };
+  return data;
 };
+
+type MarketResolver<T = { id: string }> = Resolver<Market, T>
+type ProductResolver<T = { id: string }> = Resolver<Product, T>
+type CommandResolver<T = { id: string }> = Resolver<Command, T>
+
