@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import { useRouter } from 'next/router';
 import {
   getUserFromCookie,
@@ -53,6 +53,11 @@ export const useAuthProvider = (): AuthContext => {
     },
     [router]
   );
+
+  // dev only
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') window.logout = logout;
+  }, [logout]);
 
   const signIn = useCallback(async (email, plainPassword) => {
     return await firebase
