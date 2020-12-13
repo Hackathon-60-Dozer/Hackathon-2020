@@ -211,7 +211,10 @@ const HomePage: NextPage = () => {
             </Card>
           ))}
         </Carousel>
-        <Button className={styles.sectionButton} variant={'contained'} color={}>
+        <Button
+          className={styles.sectionButton}
+          variant={'contained'}
+          color={'secondary'}>
           Voir tous les produits
         </Button>
       </Section>
