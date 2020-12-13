@@ -1,4 +1,5 @@
 import React, { InputHTMLAttributes } from 'react';
+import styled from "styled-components";
 
 export type InputProps = {
   label?: string;
@@ -15,12 +16,16 @@ const Input: React.FC<InputProps & InputHTMLAttributes<HTMLInputElement>> = ({
   ...props
 }) => {
   return (
-    <div>
+    <MainContainer>
       {label && <label htmlFor={props.id}>{label}</label>}
       <input {...props} ref={inputRef} />
       {error && <span style={{ color: 'red', fontSize: 12 }}>{error}</span>}
-    </div>
+    </MainContainer>
   );
 };
+
+const MainContainer = styled.div `
+
+`
 
 export default Input;

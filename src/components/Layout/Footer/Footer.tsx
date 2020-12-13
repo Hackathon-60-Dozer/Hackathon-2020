@@ -11,6 +11,7 @@ const Footer: React.FC = () => {
       <MainContainer>
         <div>
           <h2>Vous êtes un professionnel ?</h2>
+          <Link href={routes.addMerchant.url}>Devenir commerçant</Link>
           <Link href={routes.signUp.url}>Inscrivez-vous</Link>
           <Link href={routes.signIn.url}>Connectez-vous</Link>
         </div>

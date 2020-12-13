@@ -48,7 +48,9 @@ const Navbar: React.FC = () => {
 
 const Wrapper = styled.div`
   width: 100%;
+  position: -webkit-sticky;
   position: sticky;
+  top: 0;
   z-index: 2;
 `;
 
