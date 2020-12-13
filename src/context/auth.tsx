@@ -9,6 +9,7 @@ import {
 } from '@helpers/auth';
 import { Session } from '@types';
 import { initializeFirebase } from '@services/firebase/client';
+import { setToken } from '@services/apollo/client';
 
 initializeFirebase();
 const auth = firebase.auth();
@@ -56,7 +57,10 @@ export const useAuthProvider = (): AuthContext => {
 
   // dev only
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') window.logout = logout;
+    if (process.env.NODE_ENV === 'development') {
+      // @ts-ignore
+      window.logout = logout;
+    }
   }, [logout]);
 
   const signIn = useCallback(async (email, plainPassword) => {
@@ -74,14 +78,17 @@ export const useAuthProvider = (): AuthContext => {
         const sessionData = mapUserData(user);
         setUserCookie(sessionData);
         setSession(sessionData);
+        setToken(sessionData.token);
       } else {
         removeUserCookie();
         setSession(null);
+        setToken(null);
       }
     });
 
     const userFromCookie = getUserFromCookie();
     setSession(userFromCookie);
+    setToken(userFromCookie?.token);
 
     return () => {
       cancelAuthListener();

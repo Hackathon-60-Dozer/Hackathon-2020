@@ -13,6 +13,7 @@ import yup from '@yup';
 import { gql, useMutation } from '@apollo/client';
 import translations from '@translations';
 import routes, { rootUrl } from '@constants/routes';
+import { setToken } from '@services/apollo/client';
 
 initializeFirebase();
 
@@ -25,8 +26,14 @@ type FormData = {
 };
 
 const SIGNUP_MUTATION = gql`
-  mutation signUp($input: SignUpInput) {
+  mutation signUp($input: SignUpInput!) {
     signUp(input: $input)
+  }
+`;
+
+const ADD_USER_INFO_MUTATION = gql`
+  mutation addUserInfo($input: AddUserInfoInput!) {
+    addUserInfo(input: $input)
   }
 `;
 
@@ -38,7 +45,6 @@ const schema = yup.object().shape({
   plainPasswordConfirm: yup
     .string()
     .test('equal', 'Les mots de passe de correspondent pas', function (v) {
-      // Don't use arrow functions
       const ref = yup.ref('plainPassword');
       return v === this.resolve(ref);
     })
@@ -46,9 +52,10 @@ const schema = yup.object().shape({
 });
 
 export const SignUpForm: React.FC = () => {
+  const [addUserInfo] = useMutation(ADD_USER_INFO_MUTATION);
   const [signUp] = useMutation(SIGNUP_MUTATION);
   const router = useRouter();
-  const [error, setError] = useState();
+  const [error, setError] = useState<string>();
   const { session, logout } = useAuth();
   const { register, handleSubmit, errors } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -65,27 +72,36 @@ export const SignUpForm: React.FC = () => {
         fullLabel: 'Continuer avec Google',
         requireDisplayName: true,
       },
-      {
-        provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        fullLabel: 'Continuer avec Facebook',
-        requireDisplayName: true,
-      },
     ],
     callbacks: {
       signInSuccessWithAuthResult(
         authResult: any,
         redirectUrl?: string
       ): boolean {
-        console.log(
-          authResult.additionalUserInfo.profile.family_name,
-          authResult.additionalUserInfo.profile.given_name,
-          authResult.additionalUserInfo.profile.name
-        );
-        // "LEPAS" "Benjamin" "Benjamin LEPAS"
-        // undefined "Octanium" "Octanium"
+        if (authResult.additionalUserInfo.isNewUser) {
+          firebase
+            .auth()
+            .currentUser.getIdToken()
+            .then((token) => {
+              setToken(token);
 
-        router.push(redirectUrl);
-        return true;
+              addUserInfo({
+                variables: {
+                  input: {
+                    firstName: authResult.additionalUserInfo.profile.given_name,
+                    lastName: authResult.additionalUserInfo.profile.family_name,
+                  },
+                },
+              })
+                .then(() => {
+                  router.push(redirectUrl);
+                })
+                .catch(() => {
+                  setError(translations.errors.internal);
+                });
+            });
+        }
+        return false;
       },
       async signInFailure(e: firebaseui.auth.AuthUIError): Promise<void> {
         setError(translations.errors[e.code] || e.message);
@@ -97,20 +113,21 @@ export const SignUpForm: React.FC = () => {
     if (session) {
       router.push(routes.signIn.url);
     }
-  }, [router, session]);
+  }, [logout, router, session]);
 
   const onSubmit = useCallback(
-    ({ email, plainPassword }: FormData) => {
+    ({ plainPasswordConfirm, ...input }: FormData) => {
       signUp({
         variables: {
-          input: {
-            email,
-            plainPassword,
-          },
+          input,
         },
-      }).then(() => {
-        router.push('/');
-      });
+      })
+        .then(() => {
+          router.push('/');
+        })
+        .catch((e) => {
+          setError(translations.errors.internal);
+        });
     },
     [router, signUp]
   );

@@ -1,33 +1,64 @@
 import {
   ApolloClient,
+  ApolloLink,
   HttpLink,
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
-import { concatPagination } from '@apollo/client/utilities';
+import { onError } from '@apollo/client/link/error';
 import { AppProps } from 'next/app';
 import merge from 'deepmerge';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient;
+let token;
+
+export const setToken = (newToken: string): void => {
+  token = newToken;
+};
+
+const httpLink = new HttpLink({
+  uri: process.env.NEXT_PUBLIC_APOLLO_URI,
+  credentials: 'include',
+});
+
+const logoutLink = onError(({ graphQLErrors }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ extensions }) => {
+      switch (extensions.code) {
+        case 'UNAUTHENTICATED':
+          if (typeof window !== 'undefined') {
+            const current = window.localStorage.getItem('logout');
+            if (current === undefined || current === null) {
+              window.localStorage.setItem('logout', String(Date.now()));
+              setToken(null);
+            }
+          }
+      }
+    });
+  }
+});
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  if (token) {
+    operation.setContext(({ headers = {} }) => {
+      return {
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    });
+  }
+  return forward(operation);
+});
 
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: new HttpLink({
-      uri: process.env.NEXT_PUBLIC_APOLLO_URI, // Server URL (must be absolute)
-      credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-    }),
-    cache: new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields: {
-            allPosts: concatPagination(),
-          },
-        },
-      },
-    }),
+    link: logoutLink.concat(authMiddleware.concat(httpLink)),
+    cache: new InMemoryCache(),
   });
 }
 
