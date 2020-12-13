@@ -1,18 +1,36 @@
 import React from 'react';
 import Head from 'next/head';
 import Footer from '@components/Layout/Footer/Footer';
-import Navbar from '@components/Layout/Navbar/Navbar';
+import Header from '@components/Layout/Header/Header';
 
-import styles from './Layout.module.css';
+import { makeStyles, Theme } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  main: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+}));
 
 const Layout: React.FC = ({ children }) => {
+  const styles = useStyles();
+
   return (
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
       </Head>
 
-      <Navbar />
+      <Header />
 
       <main className={styles.main}>{children}</main>
 

@@ -3,6 +3,10 @@ const routes = {
     url: '/',
     name: 'Accueil',
   },
+  account: {
+    url: '/account',
+    name: 'Profil',
+  },
   signIn: {
     url: '/signin',
     name: 'Connexion',

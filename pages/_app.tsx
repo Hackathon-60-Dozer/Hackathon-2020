@@ -2,41 +2,40 @@ import React from 'react';
 import { AppProps } from 'next/app';
 import AuthProvider from '@context/auth';
 import { ApolloProvider } from '@apollo/client';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { APOLLO_STATE_PROP_NAME } from '@services/apollo/client';
 import { useApollo } from '@hook/useApollo';
 import theme from '@theme';
+import { ThemeProvider } from '@material-ui/styles';
+import { CssBaseline } from '@material-ui/core';
 
-const GlobalStyle = createGlobalStyle`
-  html,
-  body {
-    padding: 0;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-      Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-      sans-serif;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-`;
+import '@brainhubeu/react-carousel/lib/style.css';
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
   const apolloClient = useApollo(pageProps[APOLLO_STATE_PROP_NAME]);
 
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
     <AuthProvider>
       <ApolloProvider client={apolloClient}>
-        <GlobalStyle />
         <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
           <Component {...pageProps} />
         </ThemeProvider>
+        <style jsx global>{`
+          html,
+          body,
+          #__next {
+            height: 100%;
+          }
+        `}</style>
       </ApolloProvider>
     </AuthProvider>
   );
