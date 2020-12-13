@@ -23,15 +23,22 @@ const MapWithNoSSR = dynamic(() => import('@components/Map'), {
 });
 
 const useStyles = makeStyles((theme: Theme) => ({
-  hero: {},
+  hero: {
+    height: 'calc(100vh - 100px)',
+    textAlign: 'left',
+    padding: theme.spacing(0, 12),
+  },
   title: {
-    width: '65%',
+    width: '100%',
+    maxWidth: 1000,
   },
   section: {
     textAlign: 'center',
     padding: theme.spacing(12, 0),
   },
-  sectionTitle: {},
+  sectionTitle: {
+    marginBottom: 60,
+  },
   carousel: {
     width: '90vw',
     margin: 'auto',
@@ -159,8 +166,9 @@ const HomePage: NextPage = () => {
     },
   ];
 
+  // @ts-ignore
   return (
-    <Layout>
+    <Layout disabledContainer>
       <Section id={'hero'} className={styles.hero} color={'grey'} disableCrop>
         <Typography variant={'h1'} className={styles.title} color={'secondary'}>
           Retrouvez tous les commerçants près de chez vous
@@ -273,7 +281,10 @@ const HomePage: NextPage = () => {
             </Card>
           ))}
         </Carousel>
-        <Button className={styles.sectionButton} variant={'contained'}>
+        <Button
+          className={styles.sectionButton}
+          variant={'contained'}
+          color={'secondary'}>
           Voir tous les commerçants
         </Button>
       </Section>
@@ -321,7 +332,10 @@ const HomePage: NextPage = () => {
             </Card>
           ))}
         </Carousel>
-        <Button className={styles.sectionButton} variant={'contained'}>
+        <Button
+          className={styles.sectionButton}
+          variant={'contained'}
+          color={'primary'}>
           Voir tous les commerçants
         </Button>
       </Section>
@@ -329,69 +343,10 @@ const HomePage: NextPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = () => {
-  return {
-    props: {},
-  };
-};
-
-// const MainContainer = styled.div`
-//   width: 100vw;
-//   section {
-//     padding: 50px;
-//     width: 100%;
-//   }
-//
-//   #homepage_section_1 {
-//     background: ${(props) => props.theme.colors.light};
-//     color: ${(props) => props.theme.colors.secondary};
-//   }
-//   #homepage_section_2 {
-//     background: #fafafa;
-//     color: ${(props) => props.theme.colors.secondary};
-//   }
-//   #homepage_section_3 {
-//     background: ${(props) => props.theme.colors.secondary};
-//     color: lightcyan;
-//   }
-//   #homepage_section_4 {
-//     background: #fafafa;
-//     color: ${(props) => props.theme.colors.secondary};
-//   }
-//   #homepage_section_5 {
-//     background: ${(props) => props.theme.colors.secondary};
-//     color: lightcyan;
-//   }
-// `;
-//
-// const CardContent = styled.div`
-//   height: 100%;
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//
-//   img {
-//     width: 200px;
-//     height: 100%;
-//     object-fit: cover;
-//   }
-//
-//   figure {
-//     margin: 0;
-//     background: red;
-//     width: 100%;
-//     height: 90%;
-//   }
-//
-//   div {
-//     width: 100%;
-//     min-height: 10%;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     padding: 10px;
-//     font-weight: bold;
-//   }
-// `;
+// export const getStaticProps: GetStaticProps = () => {
+//   return {
+//     props: {},
+//   };
+// };
 
 export default HomePage;

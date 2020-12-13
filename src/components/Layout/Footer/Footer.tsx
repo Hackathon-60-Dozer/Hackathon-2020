@@ -29,7 +29,6 @@ const nav = [
     ],
   },
   {
-    name: 'A propos de Toulocal',
     links: [
       {
         url: '/',
@@ -64,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'flex-start',
-    padding: theme.spacing(4),
+    padding: theme.spacing(8),
   },
   section: {
     display: 'flex',
@@ -86,9 +85,11 @@ const Footer: React.FC = () => {
       <Toolbar className={styles.toolbar}>
         {nav.map((section, i) => (
           <div className={styles.section} key={i}>
-            <Typography variant={'h5'} component={'h3'}>
-              {section.name}
-            </Typography>
+            {section.name && (
+              <Typography variant={'h5'} component={'h3'}>
+                {section.name}
+              </Typography>
+            )}
             {section.links.map((link, j) => (
               <Link href={link.url} passHref key={j}>
                 <MUILink>{link.label}</MUILink>

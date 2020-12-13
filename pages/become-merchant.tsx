@@ -1,12 +1,12 @@
 import React from 'react';
 import { NextPage } from 'next';
 import Layout from '@components/Layout/Layout';
-import SignUpForm from '@components/Form/SignUp';
+import AddShopForm from '@components/Form/AppShop';
 
 const SignInPage: NextPage = () => {
   return (
-    <Layout>
-      <SignUpForm />
+    <Layout maxWidth={'md'}>
+      <AddShopForm />
     </Layout>
   );
 };

@@ -11,6 +11,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     position: 'relative',
     width: '100%',
+    textAlign: 'center',
+    padding: theme.spacing(12, 0),
   },
   crop: {
     position: 'absolute',

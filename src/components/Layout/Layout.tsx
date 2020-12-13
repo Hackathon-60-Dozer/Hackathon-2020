@@ -3,7 +3,12 @@ import Head from 'next/head';
 import Footer from '@components/Layout/Footer/Footer';
 import Header from '@components/Layout/Header/Header';
 
-import { makeStyles, Theme } from '@material-ui/core';
+import {
+  Container,
+  ContainerProps,
+  makeStyles,
+  Theme,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -11,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    minHeight: '100%',
   },
   main: {
     flex: 1,
@@ -18,21 +24,36 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    padding: theme.spacing(12, 0),
   },
 }));
 
-const Layout: React.FC = ({ children }) => {
+export type LayoutProps = {
+  disabledContainer?: boolean;
+} & ContainerProps;
+
+const Layout: React.FC<LayoutProps> = ({
+  children,
+  disabledContainer,
+  ...props
+}) => {
   const styles = useStyles();
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Toulocal</title>
       </Head>
 
       <Header />
 
-      <main className={styles.main}>{children}</main>
+      {disabledContainer ? (
+        children
+      ) : (
+        <Container {...props} className={styles.main}>
+          {children}
+        </Container>
+      )}
 
       <Footer />
     </div>

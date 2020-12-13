@@ -8,9 +8,19 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import Input from '@components/Input';
-import Button from '@components/Button';
 import translations from '@translations';
+import {
+  Button,
+  TextField,
+  InputAdornment,
+  Link as MUILink,
+  Grid,
+  Typography,
+} from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
+import routes from '@constants/routes';
 
 initializeFirebase();
 const uiConfig: firebaseui.auth.Config = {
@@ -38,14 +48,17 @@ type FormData = {
 };
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  plainPassword: yup.string().required(),
+  email: yup
+    .string()
+    .email('Veuillez enter une adresse mail valide.')
+    .required('Veuillez entrer une adresse email.'),
+  plainPassword: yup.string().required('Veuillez enter un mot de passe.'),
 });
 
 export const SignInForm: React.FC = () => {
   const router = useRouter();
   const [error, setError] = useState();
-  const { session, signIn, logout } = useAuth();
+  const { session, signIn } = useAuth();
   const { register, handleSubmit, errors } = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: 'onChange',
@@ -71,34 +84,82 @@ export const SignInForm: React.FC = () => {
   );
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Input
-          label={'Email'}
-          name={'email'}
-          id={'email'}
-          type={'email'}
-          error={errors?.email?.message}
-          inputRef={register}
-        />
-        <Input
-          label={'Mot de passe'}
-          name={'plainPassword'}
-          id={'plainPassword'}
-          type={'password'}
-          error={errors?.plainPassword?.message}
-          inputRef={register}
-        />
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <Grid container spacing={4} style={{ margin: 'auto' }}>
+        <Grid item xs={6}>
+          <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
+        </Grid>
 
-        {error && <span style={{ color: 'red' }}>{error}</span>}
-        <Button disabled={Object.keys(errors).length > 0} type={'submit'}>
-          Connexion
-        </Button>
-      </form>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-
-      {session && <Button onClick={() => logout(false)}>logout</Button>}
-    </div>
+        <Grid item xs={6} container spacing={4}>
+          <Grid item xs={12}>
+            <TextField
+              placeholder={'Email'}
+              name={'email'}
+              id={'email'}
+              type={'email'}
+              color={'secondary'}
+              error={errors.email && !!errors.email.message}
+              helperText={errors?.email?.message}
+              inputRef={register}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <FontAwesomeIcon icon={faEnvelope} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              placeholder={'Mot de passe'}
+              name={'plainPassword'}
+              id={'plainPassword'}
+              type={'password'}
+              color={'secondary'}
+              error={errors.plainPassword && !!errors.plainPassword.message}
+              helperText={errors?.plainPassword?.message}
+              inputRef={register}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <FontAwesomeIcon icon={faLock} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Grid>
+          <Grid item container spacing={2} style={{ textAlign: 'center' }}>
+            <Grid item xs={12}>
+              <Link href={routes.signUp.url} passHref>
+                <MUILink style={{ textTransform: 'uppercase' }}>
+                  Je m'inscrit
+                </MUILink>
+              </Link>
+            </Grid>
+            <Grid item xs={12}>
+              {error && (
+                <Typography variant={'body2'} color={'error'}>
+                  {error}
+                </Typography>
+              )}
+              <Button
+                disabled={Object.keys(errors).length > 0}
+                type={'submit'}
+                variant={'outlined'}
+                color={'primary'}>
+                Connexion
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </form>
   );
 };
 
