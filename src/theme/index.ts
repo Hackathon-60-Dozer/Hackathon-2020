@@ -22,6 +22,9 @@ const theme = createMuiTheme({
       fontWeight: 700,
     },
   },
+  overrides: {
+    MuiButton: {},
+  },
   palette: {
     primary: {
       main: '#e18380',

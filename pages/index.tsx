@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     width: '100%',
     textAlign: 'center',
-    margin: theme.spacing(12, 0),
+    padding: theme.spacing(12, 0),
   },
   sectionTitle: {},
   carousel: {
@@ -96,6 +96,11 @@ interface Shop {
   image: string;
 }
 
+interface Market {
+  name: string;
+  image: string;
+}
+
 interface Label {
   name: string;
   image: string;
@@ -122,6 +127,20 @@ const HomePage: NextPage = () => {
       image: 'https://picsum.photos/530/200',
     },
   ];
+  const markets: Market[] = [
+    {
+      name: 'Marché des Carmes',
+      image: 'https://picsum.photos/530/200',
+    },
+    {
+      name: 'Marché de saint aubin',
+      image: 'https://picsum.photos/530/200',
+    },
+    {
+      name: 'Marché de saint cyprien',
+      image: 'https://picsum.photos/530/200',
+    },
+  ];
   const labels: Label[] = [
     {
       name: 'Fruits et légumes',
@@ -143,7 +162,7 @@ const HomePage: NextPage = () => {
 
   return (
     <Layout>
-      <Section id={'hero'} className={styles.hero} color={'grey'}>
+      <Section id={'hero'} className={styles.hero} color={'grey'} disableCrop>
         <Typography variant={'h1'} className={styles.title} color={'secondary'}>
           Retrouvez tous les commerçants près de chez vous
         </Typography>
@@ -192,7 +211,7 @@ const HomePage: NextPage = () => {
             </Card>
           ))}
         </Carousel>
-        <Button className={styles.sectionButton} variant={'contained'}>
+        <Button className={styles.sectionButton} variant={'contained'} color={}>
           Voir tous les produits
         </Button>
       </Section>
@@ -201,91 +220,109 @@ const HomePage: NextPage = () => {
         <Typography
           variant={'h2'}
           className={styles.sectionTitle}
-          color={'secondary'}>
-          Les commercants prêt de chez vous
+          color={'textSecondary'}>
+          Les commerçants prêt de chez vous
         </Typography>
         <Paper className={styles.map} elevation={3}>
           <MapWithNoSSR mapHeight={300} />
         </Paper>
       </Section>
 
-      {/*<Section id={'shops'} className={styles.carousel}>*/}
-      {/*  {shops.map((shop, i) => (*/}
-      {/*    <Card key={i} className={styles.card}>*/}
-      {/*      <CardActionArea>*/}
-      {/*        <CardMedia*/}
-      {/*          className={styles.cardMedia}*/}
-      {/*          image={shop.image}*/}
-      {/*          title={shop.name}*/}
-      {/*        />*/}
-      {/*        <CardContent>*/}
-      {/*          <Typography gutterBottom variant="h5" component="h2">*/}
-      {/*            {shop.name}*/}
-      {/*          </Typography>*/}
-      {/*        </CardContent>*/}
-      {/*      </CardActionArea>*/}
-      {/*    </Card>*/}
-      {/*  ))}*/}
-      {/*</section>*/}
-      {/*<MainContainer>*/}
-      {/*  <Section id={"homepage_section_1"}>*/}
-      {/*    <h1>Retrouvez tous les commerçants près de chez vous</h1>*/}
-      {/*    <label htmlFor="">Position de l'utilisateur</label>*/}
-      {/*    <p>SEARCH BAR</p>*/}
-      {/*    <Button>Voir les produits</Button>*/}
-      {/*  </section>*/}
+      <Section id={'shops'} className={styles.section} color={'white'}>
+        <Typography
+          variant={'h2'}
+          className={styles.sectionTitle}
+          color={'primary'}>
+          Vos commerçants préférés
+        </Typography>
+        <Carousel
+          className={styles.carousel}
+          draggable={true}
+          itemWidth={matches ? 120 : 530}
+          offset={32}
+          plugins={[
+            'arrows',
+            'fastSwipe',
+            {
+              resolve: slidesToShowPlugin,
+              options: {
+                numberOfSlides: 2,
+              },
+            },
+          ]}>
+          {shops.map((shop, i) => (
+            <Card key={i} className={styles.card}>
+              <CardActionArea>
+                <CardMedia
+                  className={styles.cardMedia}
+                  image={shop.image}
+                  title={shop.name}
+                />
+                <CardContent className={styles.cardContent}>
+                  <Typography
+                    className={styles.cardTitle}
+                    gutterBottom
+                    variant="h4"
+                    component="h4">
+                    {shop.name}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))}
+        </Carousel>
+        <Button className={styles.sectionButton} variant={'contained'}>
+          Voir tous les commerçants
+        </Button>
+      </Section>
 
-      {/*  <Section id={"homepage_section_2"}>*/}
-      {/*    <h2>Faites le plein de produits frais</h2>*/}
-      {/*    <div>*/}
-      {/*      CARROUSSEL PRODUITS*/}
-
-      {/*      <Card width={"200px"} height={"250px"}>*/}
-      {/*        <CardContent>*/}
-      {/*          <figure>*/}
-      {/*              <img src={"https://i.picsum.photos/id/237/536/354.jpg?hmac=i0yVXW1ORpyCZpQ-CknuyV-jbtU7_x9EBQVhvT5aRr0"}/>*/}
-      {/*            </figure>*/}
-      {/*          <div>*/}
-      {/*            Boucherie Issou aya chanclador el bougnadar issou clanclure*/}
-      {/*          </div>*/}
-      {/*         </CardContent>*/}
-      {/*      </Card>*/}
-
-      {/*      <Card width={"200px"} height={"250px"}>*/}
-      {/*        <CardContent>*/}
-      {/*          <figure>*/}
-      {/*            <img src={"https://loremflickr.com/cache/resized/65535_50681267988_08b06c9201_320_240_nofilter.jpg"}/>*/}
-      {/*          </figure>*/}
-      {/*          <div>*/}
-      {/*            Boucherie Issou*/}
-      {/*          </div>*/}
-      {/*         </CardContent>*/}
-      {/*      </Card>*/}
-      {/*    </div>*/}
-      {/*
-      {/*  </section>*/}
-
-      {/*  <Section id={"homepage_section_3"}>*/}
-      {/*    <h2>Les commerçant près de chez vous</h2>*/}
-      {/*    <div>MAP ICI</div>*/}
-      {/*  </section>*/}
-
-      {/*  <Section id={"homepage_section_4"}>*/}
-      {/*    <h2>Vos commerçants préférés</h2>*/}
-      {/*    <div>*/}
-      {/*      CARROUSSEL COMMERCANTS*/}
-      {/*    </div>*/}
-      {/*    <Button>Voir tous les commerçants</Button>*/}
-      {/*  </section>*/}
-
-      {/*  <Section id={"homepage_section_5"}>*/}
-      {/*    <h2>Vos marchés préférés</h2>*/}
-      {/*    <div>*/}
-      {/*      CAROUSSEL MARCHES*/}
-      {/*    </div>*/}
-      {/*    <Button>Voir tous les marchés</Button>*/}
-      {/*  </section>*/}
-      {/*</MainContainer>*/}
+      <Section id={'shops'} className={styles.section} color={'secondary'}>
+        <Typography
+          variant={'h2'}
+          className={styles.sectionTitle}
+          color={'textSecondary'}>
+          Vos marchés préférés
+        </Typography>
+        <Carousel
+          className={styles.carousel}
+          draggable={true}
+          itemWidth={matches ? 120 : 530}
+          offset={32}
+          plugins={[
+            'arrows',
+            'fastSwipe',
+            {
+              resolve: slidesToShowPlugin,
+              options: {
+                numberOfSlides: 2,
+              },
+            },
+          ]}>
+          {markets.map((market, i) => (
+            <Card key={i} className={styles.card}>
+              <CardActionArea>
+                <CardMedia
+                  className={styles.cardMedia}
+                  image={market.image}
+                  title={market.name}
+                />
+                <CardContent className={styles.cardContent}>
+                  <Typography
+                    className={styles.cardTitle}
+                    gutterBottom
+                    variant="h4"
+                    component="h4">
+                    {market.name}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))}
+        </Carousel>
+        <Button className={styles.sectionButton} variant={'contained'}>
+          Voir tous les commerçants
+        </Button>
+      </Section>
     </Layout>
   );
 };
