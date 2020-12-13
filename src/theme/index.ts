@@ -23,7 +23,9 @@ const theme = createMuiTheme({
     },
   },
   overrides: {
-    MuiButton: {},
+    MuiButton: {
+      label: {},
+    },
   },
   palette: {
     primary: {

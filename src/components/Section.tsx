@@ -7,9 +7,10 @@ export type SectionProps = {
   disableCrop?: boolean;
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   section: {
     position: 'relative',
+    width: '100%',
   },
   crop: {
     position: 'absolute',
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
     transform: 'translateY(100%)',
     zIndex: 100,
   },
-});
+}));
 
 const Section: React.FC<SectionProps & HTMLAttributes<HTMLDivElement>> = ({
   children,

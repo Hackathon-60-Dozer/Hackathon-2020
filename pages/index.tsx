@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '65%',
   },
   section: {
-    width: '100%',
     textAlign: 'center',
     padding: theme.spacing(12, 0),
   },
