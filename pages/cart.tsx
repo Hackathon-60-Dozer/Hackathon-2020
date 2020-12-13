@@ -1,12 +1,12 @@
 import React from 'react';
 import { NextPage } from 'next';
 import Layout from '@components/Layout/Layout';
-import AddShopForm from '@components/Form/AddShop';
+import SignInForm from '@components/Form/SignIn';
 
 const SignInPage: NextPage = () => {
   return (
-    <Layout maxWidth={'sm'}>
-      <AddShopForm />
+    <Layout>
+      <SignInForm />
     </Layout>
   );
 };

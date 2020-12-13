@@ -6,6 +6,7 @@ import {
   makeStyles,
   Theme,
   Toolbar,
+  useMediaQuery,
 } from '@material-ui/core';
 import Nav from '@components/Layout/Header/Nav';
 import Link from 'next/link';
@@ -83,6 +84,7 @@ const transitionStyles = {
 const Header: React.FC = () => {
   const styles = useStyles();
   const { session } = useAuth();
+  const phone = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
   const [deployed, setDeployed] = useState(false);
 
   return (
@@ -99,18 +101,11 @@ const Header: React.FC = () => {
           </IconButton>
 
           <Link href={routes.home.url}>
-            <React.Fragment>
-              <HiddenJs smDown>
-                <img
-                  className={styles.logo}
-                  src={'/static/logo-full.svg'}
-                  alt=""
-                />
-              </HiddenJs>
-              <HiddenCss mdUp>
-                <img className={styles.logo} src="/static/logo.svg" alt="" />
-              </HiddenCss>
-            </React.Fragment>
+            <img
+              className={styles.logo}
+              src={phone ? '/static/logo-full.svg' : '/static/logo.svg'}
+              alt=""
+            />
           </Link>
 
           <div className={styles.user}>

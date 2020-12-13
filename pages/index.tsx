@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { GetStaticProps, NextPage } from 'next';
+import React from 'react';
+import { NextPage } from 'next';
 import Layout from '@components/Layout/Layout';
 import {
   Button,
@@ -234,7 +234,10 @@ const HomePage: NextPage = () => {
           Les commerçants prêt de chez vous
         </Typography>
         <Paper className={styles.map} elevation={3}>
-          <MapWithNoSSR mapHeight={300} />
+          <MapWithNoSSR
+            // @ts-ignore
+            mapHeight={300}
+          />
         </Paper>
       </Section>
 

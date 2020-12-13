@@ -1,7 +1,4 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { spacing } from '@material-ui/system';
 
 export const colors = {
   primary: '#e18380',
@@ -28,6 +25,14 @@ const theme = responsiveFontSizes(
       h2: {
         fontFamily: 'Merriweather, sans-serif',
         fontWeight: 700,
+      },
+    },
+    props: {
+      MuiPaper: {
+        elevation: 3,
+      },
+      MuiCard: {
+        elevation: 3,
       },
     },
     overrides: {

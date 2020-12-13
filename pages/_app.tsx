@@ -22,8 +22,8 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
   }, []);
 
   return (
-    <AuthProvider>
-      <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={apolloClient}>
+      <AuthProvider>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
@@ -36,8 +36,8 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
             height: 100%;
           }
         `}</style>
-      </ApolloProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </ApolloProvider>
   );
 }
 

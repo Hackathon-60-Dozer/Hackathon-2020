@@ -7,15 +7,17 @@ import {
   removeUserCookie,
   setUserCookie,
 } from '@helpers/auth';
-import { Session } from '@types';
+import { Session, Account } from '@types';
 import { initializeFirebase } from '@services/firebase/client';
 import { setToken } from '@services/apollo/client';
+import { gql, useLazyQuery } from '@apollo/client';
 
 initializeFirebase();
 const auth = firebase.auth();
 
 export interface AuthContext {
   session: Session;
+  account: Account;
   logout: (redirect?: boolean) => Promise<void>;
   signIn: (
     email: string,
@@ -25,6 +27,7 @@ export interface AuthContext {
 
 const initialValue = {
   session: null,
+  account: null,
   logout: () => null,
   signIn: () => null,
 };
@@ -38,6 +41,14 @@ export const AuthProvider: React.FC = ({ children }) => {
 };
 
 export const useAuthProvider = (): AuthContext => {
+  const [fetchViewer, { data }] = useLazyQuery<{ viewer: Account }>(gql`
+    query {
+      viewer {
+        firstName
+        lastName
+      }
+    }
+  `);
   const [session, setSession] = useState<Session>(null);
   const router = useRouter();
 
@@ -62,6 +73,12 @@ export const useAuthProvider = (): AuthContext => {
       window.logout = logout;
     }
   }, [logout]);
+
+  useEffect(() => {
+    if (!!session) {
+      fetchViewer();
+    }
+  }, [fetchViewer, session]);
 
   const signIn = useCallback(async (email, plainPassword) => {
     return await firebase
@@ -97,6 +114,7 @@ export const useAuthProvider = (): AuthContext => {
 
   return {
     session,
+    account: data?.viewer || null,
     logout,
     signIn,
   };
