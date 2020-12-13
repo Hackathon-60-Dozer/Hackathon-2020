@@ -17,6 +17,10 @@ const theme = createMuiTheme({
       fontSize: '5.5vw',
       fontWeight: 700,
     },
+    h2: {
+      fontFamily: 'Merriweather, sans-serif',
+      fontWeight: 700,
+    },
   },
   palette: {
     primary: {

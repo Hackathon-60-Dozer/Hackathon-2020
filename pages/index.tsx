@@ -2,40 +2,91 @@ import React, { useEffect, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import Layout from '@components/Layout/Layout';
 import {
+  Button,
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
   makeStyles,
+  Paper,
   Theme,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@material-ui/core';
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
-// import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic';
+import Section from '@components/Section';
 
-// // @ts-ignore
-// const { default: Carousel, slidesToShowPlugin } = dynamic(
-//   () => require('@brainhubeu/react-carousel'),
-//   { ssr: false }
-// );
+const MapWithNoSSR = dynamic(() => import('@components/Map'), {
+  ssr: false,
+});
 
 const useStyles = makeStyles((theme: Theme) => ({
   hero: {},
   title: {
     width: '65%',
   },
+  section: {
+    width: '100%',
+    textAlign: 'center',
+    margin: theme.spacing(12, 0),
+  },
+  sectionTitle: {},
   carousel: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    overflow: 'hidden',
+    width: '90vw',
+    margin: 'auto',
+    marginRight: 0,
   },
   card: {
     width: 530,
+    height: '100%',
+    borderRadius: 2,
+    [theme.breakpoints.down('xs')]: {
+      width: 120,
+    },
+  },
+  cardAction: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+  },
+  cardContent: {
+    padding: theme.spacing(6.5, 3, 3, 3),
+    [theme.breakpoints.down('xs')]: {
+      padding: theme.spacing(2, 2, 3, 2),
+    },
   },
   cardMedia: {
+    width: '100%',
     height: 200,
+    [theme.breakpoints.down('xs')]: {
+      height: 65,
+    },
+  },
+  cardTitle: {
+    width: '55%',
+    margin: 'auto',
+    textAlign: 'center',
+    fontFamily: 'Karla',
+    fontWeight: 500,
+    color: theme.palette.secondary.main,
+    textTransform: 'uppercase',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+      fontSize: '1rem',
+    },
+  },
+  sectionButton: {
+    margin: 'auto',
+    marginTop: 80,
+  },
+
+  map: {
+    width: '60%',
+    height: 300,
+    borderRadius: 0,
+    margin: 'auto',
   },
 }));
 
@@ -51,6 +102,8 @@ interface Label {
 }
 
 const HomePage: NextPage = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const styles = useStyles();
   const shops: Shop[] = [
     {
@@ -90,73 +143,99 @@ const HomePage: NextPage = () => {
 
   return (
     <Layout>
-      <section id={'hero'} className={styles.hero}>
+      <Section id={'hero'} className={styles.hero} color={'grey'}>
         <Typography variant={'h1'} className={styles.title} color={'secondary'}>
           Retrouvez tous les commerçants près de chez vous
         </Typography>
-      </section>
+      </Section>
 
-      <section id={'labels'}>
-        {typeof window !== 'undefined' && (
-          <Carousel
-            plugins={[
-              'arrows',
-              'fastSwipe',
-              {
-                resolve: slidesToShowPlugin,
-                options: {
-                  numberOfSlides: 4,
-                },
+      <Section id={'labels'} className={styles.section} color={'white'}>
+        <Typography
+          variant={'h2'}
+          className={styles.sectionTitle}
+          color={'secondary'}>
+          Faites le plein de produits frais
+        </Typography>
+        <Carousel
+          className={styles.carousel}
+          draggable={true}
+          itemWidth={matches ? 120 : 530}
+          offset={32}
+          plugins={[
+            'arrows',
+            'fastSwipe',
+            {
+              resolve: slidesToShowPlugin,
+              options: {
+                numberOfSlides: 2,
               },
-            ]}>
-            {labels.map((label, i) => (
-              <img src={'https://picsum.photos/530/200'} alt={''} key={i}></img>
-              // <Card key={i} className={styles.card}>
-              //   <CardActionArea>
-              //     <CardMedia
-              //       className={styles.cardMedia}
-              //       image={label.image}
-              //       title={label.name}
-              //     />
-              //     <CardContent>
-              //       <Typography gutterBottom variant="h5" component="h2">
-              //         {label.name}
-              //       </Typography>
-              //     </CardContent>
-              //   </CardActionArea>
-              // </Card>
-            ))}
-          </Carousel>
-        )}
-      </section>
+            },
+          ]}>
+          {labels.map((label, i) => (
+            <Card key={i} className={styles.card}>
+              <CardActionArea>
+                <CardMedia
+                  className={styles.cardMedia}
+                  image={label.image}
+                  title={label.name}
+                />
+                <CardContent className={styles.cardContent}>
+                  <Typography
+                    className={styles.cardTitle}
+                    gutterBottom
+                    variant="h4"
+                    component="h4">
+                    {label.name}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))}
+        </Carousel>
+        <Button className={styles.sectionButton} variant={'contained'}>
+          Voir tous les produits
+        </Button>
+      </Section>
 
-      <section id={'shops'} className={styles.carousel}>
-        {shops.map((shop, i) => (
-          <Card key={i} className={styles.card}>
-            <CardActionArea>
-              <CardMedia
-                className={styles.cardMedia}
-                image={shop.image}
-                title={shop.name}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {shop.name}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        ))}
-      </section>
+      <Section id={'map'} className={styles.section} color={'secondary'}>
+        <Typography
+          variant={'h2'}
+          className={styles.sectionTitle}
+          color={'secondary'}>
+          Les commercants prêt de chez vous
+        </Typography>
+        <Paper className={styles.map} elevation={3}>
+          <MapWithNoSSR mapHeight={300} />
+        </Paper>
+      </Section>
+
+      {/*<Section id={'shops'} className={styles.carousel}>*/}
+      {/*  {shops.map((shop, i) => (*/}
+      {/*    <Card key={i} className={styles.card}>*/}
+      {/*      <CardActionArea>*/}
+      {/*        <CardMedia*/}
+      {/*          className={styles.cardMedia}*/}
+      {/*          image={shop.image}*/}
+      {/*          title={shop.name}*/}
+      {/*        />*/}
+      {/*        <CardContent>*/}
+      {/*          <Typography gutterBottom variant="h5" component="h2">*/}
+      {/*            {shop.name}*/}
+      {/*          </Typography>*/}
+      {/*        </CardContent>*/}
+      {/*      </CardActionArea>*/}
+      {/*    </Card>*/}
+      {/*  ))}*/}
+      {/*</section>*/}
       {/*<MainContainer>*/}
-      {/*  <section id={"homepage_section_1"}>*/}
+      {/*  <Section id={"homepage_section_1"}>*/}
       {/*    <h1>Retrouvez tous les commerçants près de chez vous</h1>*/}
       {/*    <label htmlFor="">Position de l'utilisateur</label>*/}
       {/*    <p>SEARCH BAR</p>*/}
       {/*    <Button>Voir les produits</Button>*/}
       {/*  </section>*/}
 
-      {/*  <section id={"homepage_section_2"}>*/}
+      {/*  <Section id={"homepage_section_2"}>*/}
       {/*    <h2>Faites le plein de produits frais</h2>*/}
       {/*    <div>*/}
       {/*      CARROUSSEL PRODUITS*/}
@@ -183,15 +262,15 @@ const HomePage: NextPage = () => {
       {/*         </CardContent>*/}
       {/*      </Card>*/}
       {/*    </div>*/}
-      {/*    <Button>Voir tous les produits</Button>*/}
+      {/*
       {/*  </section>*/}
 
-      {/*  <section id={"homepage_section_3"}>*/}
+      {/*  <Section id={"homepage_section_3"}>*/}
       {/*    <h2>Les commerçant près de chez vous</h2>*/}
       {/*    <div>MAP ICI</div>*/}
       {/*  </section>*/}
 
-      {/*  <section id={"homepage_section_4"}>*/}
+      {/*  <Section id={"homepage_section_4"}>*/}
       {/*    <h2>Vos commerçants préférés</h2>*/}
       {/*    <div>*/}
       {/*      CARROUSSEL COMMERCANTS*/}
@@ -199,7 +278,7 @@ const HomePage: NextPage = () => {
       {/*    <Button>Voir tous les commerçants</Button>*/}
       {/*  </section>*/}
 
-      {/*  <section id={"homepage_section_5"}>*/}
+      {/*  <Section id={"homepage_section_5"}>*/}
       {/*    <h2>Vos marchés préférés</h2>*/}
       {/*    <div>*/}
       {/*      CAROUSSEL MARCHES*/}
@@ -211,7 +290,11 @@ const HomePage: NextPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = () => {};
+export const getStaticProps: GetStaticProps = () => {
+  return {
+    props: {},
+  };
+};
 
 // const MainContainer = styled.div`
 //   width: 100vw;
