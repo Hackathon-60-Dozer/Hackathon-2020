@@ -180,11 +180,8 @@ const Index: NextPage = () => {
           <Typography color={"primary"}>Votre espace vendeur</Typography>
         </div>
       </Section>
-      <Divider color={"grey"}/>
-      <Section color={"white"}>
-        <Typography variant={"h2"} color={"secondary"} style={{marginBottom: 50}}>Commandes en attente</Typography>
 
-      </Section>
+      <Divider color={"grey"}/>
 
       <Section color={"secondary"}>
         <Typography variant={"h2"} color={"textSecondary"} style={{fontSize: 30, marginBottom: 10}}>Vos insights <FontAwesomeIcon icon={faPen} style={{color: "#e18380"}}/></Typography>
