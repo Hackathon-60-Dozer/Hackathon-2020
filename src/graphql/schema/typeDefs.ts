@@ -18,52 +18,29 @@ export const typeDefs = gql`
   scalar ObjectID
   scalar Void
 
-  type Example {
-    id: ID!
-    name: String!
-  }
-
-  input ExampleInput {
-    name: String
-  }
-
   type Address {
-    country: String! # ISO Code
-    name: String! # Full line name
-    firstname: String!
-    lastname: String!
-    organisationName: String!
-    administrativeArea: String! # State / Province / Region
-    locality: String! # City / Town
-    postalCode: String! # Postal Code / ZIP Code
-    premise: String! # Apartment / Suite / Box number, etc,
+    administrative: String!
+    city: String!
+    country: String!
+    countryCode: String!
+    county: String!
+    lat: Float!
+    lng: Float!
+    postcode: String!
+    postcodes: [String]!
+    value: String!
   }
   input AddressInput {
-    country: String! # ISO Code
-    name: String! # Full line name
-    firstname: String!
-    lastname: String!
-    organisationName: String!
-    administrativeArea: String! # State / Province / Region
-    locality: String! # City / Town
-    postalCode: String! # Postal Code / ZIP Code
-    premise: String! # Apartment / Suite / Box number, etc,
-  }
-
-  type MarketMeta {
-    validated: Boolean
-  }
-  type Market {
-    name: String!
-    address: Address!
-    shops(_: String): [Shop]!
-    meta: MarketMeta!
-    owner: String!
-  }
-  input MarketInput {
-    name: String!
-    address: AddressInput!
-    owner: String!
+    administrative: String!
+    city: String!
+    country: String!
+    countryCode: String!
+    county: String!
+    lat: Float!
+    lng: Float!
+    postcode: String!
+    postcodes: [String]!
+    value: String!
   }
 
   type Organisation {
@@ -72,27 +49,26 @@ export const typeDefs = gql`
     siege: Address!
   }
   type ShopMeta {
-    useMarketCollectPoint: Boolean
-    marketValidated: Boolean
     validated: Boolean
   }
   type Shop {
+    _id: String!
     name: String!
+    address: Address!
     organisation: Organisation!
-    owner: String!
     labels: [String]!
-    market(_: String): Market!
-    products(_: String): [Product]!
-    commands(_: String): [Command]!
+    products: [Product]!
+    commands: [Command]!
+    owner(_: String): Account!
     meta: ShopMeta!
   }
   input ShopInput {
     name: String!
+    address: AddressInput
     organisationName: String!
     organisationSiret: String!
     organisationSiege: AddressInput!
     labels: [String]!
-    market: String!
   }
 
   type ProductDetails {
@@ -105,7 +81,7 @@ export const typeDefs = gql`
   }
   type Product {
     name: String!
-    price: Int!
+    price: Float!
     unit: String!
     details: ProductDetails!
     meta: ProductMeta!
@@ -120,23 +96,40 @@ export const typeDefs = gql`
     user: String!
     product(_: String): [Product]!
     collectDate: Date!
-    price: Int!
+    price: Float!
     paymentType: String!
     meta: CommandMeta!
   }
 
+  input SignUpInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    plainPassword: String!
+  }
+
+  input AddUserInfoInput {
+    firstName: String!
+    lastName: String
+  }
+
+  type Account {
+    firstName: String!
+    lastName: String
+  }
+
   type Query {
-    getMarket(id: ID!): Market
+    getAllShops: [ID]!
     getShop(id: ID!): Shop
+
+    viewer: Account
   }
 
   type Mutation {
-    addShop(input: ShopInput!): Shop
-    addMarket(input: MarketInput!): Market
-    addProduct(market: ID!, input: MarketInput!): Product
+    addShop(input: ShopInput!): Void
+    addProduct(market: ID!, input: ShopInput!): Void
 
-    addExample(input: ExampleInput!): Boolean!
-    editExample(id: ID!, input: ExampleInput!): Boolean!
-    removeExample(id: ID!): Boolean!
+    signUp(input: SignUpInput!): Boolean!
+    addUserInfo(input: AddUserInfoInput!): Boolean!
   }
 `;

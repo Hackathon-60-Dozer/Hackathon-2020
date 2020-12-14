@@ -1,16 +1,16 @@
-import mongoose, { Schema } from 'mongoose';
-import { Address, Model } from '@src/types';
+import { Schema } from 'mongoose';
 
 const AddressSchema = new Schema({
-  country: String, // ISO Code
-  name: String, // Full line name
-  firstname: String,
-  lastname: String,
-  organisationName: String,
-  administrativeArea: String, // State / Province / Region
-  locality: String, // City / Town
-  postalCode: String, // Postal Code / ZIP Code
-  premise: String, // Apartment / Suite / Box number, etc,
+  administrative: String,
+  city: String,
+  country: String,
+  countryCode: String,
+  county: String,
+  lat: Number,
+  lng: Number,
+  postcode: String,
+  postcodes: [String],
+  value: String,
 });
 
-export default mongoose.model('Address', AddressSchema) as Model<Address>;
+export default AddressSchema;

@@ -41,44 +41,27 @@ export type Resolver<R = any, T = any> = (
   ctx: any
 ) => Promise<R>;
 
-export interface Example {
-  id: string;
-  name: string;
-}
-
-export interface ExampleInput {
-  name?: string;
-}
-
-export interface ExampleSearch {
-  filter?: string;
-  sort?: string;
-  text?: string;
-}
-
 export interface Address {
-  country: string; // ISO Code
-  name: string; // Full line name
-  firstname: string;
-  lastname: string;
-  organisationName: string;
-  administrativeArea: string; // State / Province / Region
-  locality: string; // City / Town
-  postalCode: string; // Postal Code / ZIP Code
-  premise: string; // Apartment / Suite / Box number, etc,
+  administrative: string;
+  city: string;
+  country: string;
+  countryCode: string;
+  county: string;
+  lat: number;
+  lng: number;
+  postcode: string;
+  postcodes: string[];
+  value: string;
 }
 
-export type UserId = string; /** Reference to user */
-export type Ref<T> = string; /** Database beference */
+// eslint-disable-next-line no-unused-vars
+export type Ref<T> = string; /** Database reference */
 
-export interface Market {
-  name: string;
-  address: Address;
-  shop: Ref<Shop>[];
-  meta: {
-    validated: boolean;
-  };
-  owner: UserId;
+export interface User {
+  uid: string;
+  firstName: string;
+  lastName: string;
+  shop?: Ref<Shop>;
 }
 
 export type Label = string; /** Food typr label */
@@ -89,13 +72,8 @@ export interface Shop {
     siret: string;
     siege: Address;
   };
-  owner: {
-    uid: UserId;
-    firstName: string;
-    lastName: string;
-  };
+  owner: Ref<User>;
   labels: Label[];
-  market?: Ref<Market>;
   products: Product[];
   commands: Command[];
   meta: {
@@ -124,7 +102,7 @@ export interface Product {
 
 export type PaymentType = 'online' | 'onsite';
 export interface Command {
-  user: UserId;
+  user: Ref<User>;
   product: Ref<Product>[];
   collectDate: Date;
   price: number;

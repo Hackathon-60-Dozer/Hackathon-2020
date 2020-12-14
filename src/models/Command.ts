@@ -3,7 +3,7 @@ import { Command, Model } from '@src/types';
 import Product from '@src/models/Product';
 
 const CommandSchema = new Schema({
-  user: String, // payeur
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
   products: [Product.schema],
   collectDate: Date,
   price: Number, // HT

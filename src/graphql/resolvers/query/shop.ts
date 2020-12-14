@@ -1,32 +1,20 @@
-import {
-  Resolver,
-  Shop as ShopType,
-  Market,
-  Product,
-  Command,
-} from '@src/types';
+import { Resolver } from '@src/types';
 import Shop from '@src/models/Shop';
 import { ApolloError } from 'apollo-server-express';
+import { shopResolver } from '@src/helpers/resolvers';
 
-type ShopData = {
-  market: MarketResolver<Record<string, unknown>>;
-  products: ProductResolver<Record<string, unknown>>;
-  commands: CommandResolver<Record<string, unknown>>;
-} & ShopType;
-type ShopResolver<T = { id: string }> = Resolver<ShopData, T>;
+export const getShop: Resolver = async (_, args, ctx) => {
+  return await shopResolver(args.id)(_, args, ctx);
+};
 
-export const getShop: ShopResolver = async (_, { id }) => {
-  let data: ShopData;
+export const getAllShops: Resolver<string[]> = async () => {
+  let data;
 
   try {
-    await Shop.findById(id);
+    data = await Shop.find().distinct('_id');
   } catch (e) {
     throw new ApolloError('This shop does not exist');
   }
 
   return data;
 };
-
-type MarketResolver<T = { id: string }> = Resolver<Market, T>;
-type ProductResolver<T = { id: string }> = Resolver<Product, T>;
-type CommandResolver<T = { id: string }> = Resolver<Command, T>;
