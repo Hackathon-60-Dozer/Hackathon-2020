@@ -155,12 +155,12 @@ const HomePage: NextPage = () => {
     {
       name: 'Boulangerie du Midi',
       labels: ['Vegan'],
-      image: 'https://picsum.photos/530/200',
+      image: 'https://fr.rc-cdn.community.thermomix.com/recipeimage/evs5k5in-21c05-024863-cfcd2-71r3w15i/ec37d89a-70b3-41c6-a5c1-cee9603cefb8/main/pain-du-boulanger.jpg',
     },
     {
       name: 'Boucherie du petit chiot',
       labels: ['Viande'],
-      image: 'https://picsum.photos/530/200',
+      image: 'https://www.leparisien.fr/resizer/YowlAfDGcdQHYtmWAuGGVtspn1Y=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/4W2SZRDAV4U2EU65QDP4ZPK4TA.jpg',
     },
     {
       name: "LegaFruit's",
@@ -171,15 +171,15 @@ const HomePage: NextPage = () => {
   const markets: Market[] = [
     {
       name: 'Marché des Carmes',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://www.notretemps.com/cache/com_zoo_images/de/farines-sans-gluten_0d131f6c146e6281298a10ac2913b974.jpg',
     },
     {
       name: 'Marché de saint aubin',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://www.foodette.fr/wp-content/uploads/2014/10/plateau_fromage_M.studio-fotolia.jpg',
     },
     {
       name: 'Marché de saint cyprien',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://www.leparisien.fr/resizer/YowlAfDGcdQHYtmWAuGGVtspn1Y=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/4W2SZRDAV4U2EU65QDP4ZPK4TA.jpg',
     },
   ];
   const labels: Label[] = [
@@ -189,15 +189,15 @@ const HomePage: NextPage = () => {
     },
     {
       name: 'produits laitiers',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://www.foodette.fr/wp-content/uploads/2014/10/plateau_fromage_M.studio-fotolia.jpg',
     },
     {
       name: 'Viande poisson',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://www.leparisien.fr/resizer/YowlAfDGcdQHYtmWAuGGVtspn1Y=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/4W2SZRDAV4U2EU65QDP4ZPK4TA.jpg',
     },
     {
       name: 'Céréales et farines',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://www.notretemps.com/cache/com_zoo_images/de/farines-sans-gluten_0d131f6c146e6281298a10ac2913b974.jpg',
     },
   ];
 
