@@ -23,11 +23,10 @@ import Layout from '@components/Layout/Layout';
 import { gql } from '@apollo/client';
 import { initializeApollo } from '@services/apollo/client';
 import { Shop } from '@types';
-import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
 import Section from '@components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  firstHeroContainer: {
+  firstContainer: {
     height: 250,
     position: 'relative',
     margin: 0,
@@ -38,12 +37,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       objectFit: 'cover',
     },
   },
-  secondHeroContainer: {
+  secondContainer: {
     padding: 15,
   },
-  thirdHeroContainer: {
+  thirdContainer: {
     padding: 25,
     background: theme.palette.secondary.main,
+    textAlign: 'left',
+  },
+
+  sectionTitle: {
+    marginBottom: 60,
   },
 
   carousel: {
@@ -52,7 +56,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 0,
   },
   card: {
-    width: 150,
+    margin: theme.spacing(2, 4),
+    width: 200,
     height: '100%',
     borderRadius: 2,
   },
@@ -62,17 +67,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
   },
   cardContent: {
-    padding: theme.spacing(6.5, 3, 3, 3),
-    [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(2, 2, 3, 2),
-    },
+    padding: theme.spacing(2, 2, 3, 2),
   },
   cardMedia: {
     width: '100%',
     height: 100,
-    // [theme.breakpoints.down('xs')]: {
-    //   height: 65,
-    // },
   },
   cardTitle: {
     width: '55%',
@@ -82,6 +81,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 500,
     color: theme.palette.secondary.main,
     textTransform: 'uppercase',
+  },
+  products: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));
 
@@ -103,10 +109,10 @@ const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
   return (
     <Layout maxWidth={'lg'}>
-      <Section color={'white'} disableCrop className={styles.presentation}>
+      <Section color={'white'} disableCrop>
         <Grid container direction="row" justify="center" alignItems="center">
           <Grid item xs={6}>
-            <figure className={styles.firstHeroContainer}>
+            <figure className={styles.firstContainer}>
               <img
                 src="https://i.picsum.photos/id/9/536/354.jpg?hmac=5PiiV8cCMwZsDl8bYwpetFqtPuNn5uY2WcKTEb5ykW4"
                 alt=""
@@ -115,7 +121,7 @@ const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </Grid>
 
           <Grid item xs={6}>
-            <div className={styles.secondHeroContainer}>
+            <div className={styles.secondContainer}>
               <Typography variant={'h1'} color={'secondary'}>
                 {shop.name}
               </Typography>
@@ -126,7 +132,7 @@ const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </Grid>
 
           <Grid item xs={12}>
-            <div className={styles.thirdHeroContainer}>
+            <div className={styles.thirdContainer}>
               <Typography
                 variant={'h5'}
                 color={'textSecondary'}
@@ -154,33 +160,30 @@ const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       </Section>
 
       <Section color={'white'}>
-        <Typography variant={'h2'} color={'secondary'}>
+        <Typography
+          variant={'h2'}
+          color={'secondary'}
+          className={styles.sectionTitle}>
           Nos produits
         </Typography>
-        <GridList>
+        <div className={styles.products}>
           {shop.products.map((product, i) => (
-            <GridListTile>
-              <Card key={i} className={styles.card}>
-                <CardActionArea>
-                  <CardMedia
-                    className={styles.cardMedia}
-                    image={'https://picsum.photos/150/100'}
-                    title={product.name}
-                  />
-                  <CardContent className={styles.cardContent}>
-                    <Typography
-                      className={styles.cardTitle}
-                      gutterBottom
-                      variant="h5"
-                      component="h6">
-                      {product.name}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </GridListTile>
+            <Card key={i} className={styles.card}>
+              <CardActionArea>
+                <CardMedia
+                  className={styles.cardMedia}
+                  image={'https://picsum.photos/150/100'}
+                  title={product.name}
+                />
+                <CardContent className={styles.cardContent}>
+                  <Typography className={styles.cardTitle} variant="h6">
+                    {product.name}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
           ))}
-        </GridList>
+        </div>
       </Section>
     </Layout>
   );
@@ -256,7 +259,7 @@ export const getStaticProps: GetStaticProps<{ shop: Shop }> = async ({
     },
   });
 
-  if (!data.getShop) throw new Error("Ce produit n'existe pas !");
+  if (!data.getShop) throw new Error("Ce commerce n'existe pas !");
 
   return {
     props: {

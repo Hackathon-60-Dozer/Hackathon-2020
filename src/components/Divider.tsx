@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from 'react';
-import {makeStyles, Theme, useTheme} from '@material-ui/core';
-import MUIDivider from '@material-ui/core/Divider'
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import MUIDivider from '@material-ui/core/Divider';
 
 export type SectionProps = {
   color?: 'primary' | 'secondary' | 'grey' | 'white';
@@ -23,7 +23,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Divider: React.FC<SectionProps & HTMLAttributes<HTMLDivElement>> = (props) => {
+const Divider: React.FC<SectionProps & HTMLAttributes<HTMLDivElement>> = (
+  props
+) => {
   const styles = useStyles();
   const { color, disableCrop, ...rest } = props;
   const theme = useTheme();
@@ -36,10 +38,8 @@ const Divider: React.FC<SectionProps & HTMLAttributes<HTMLDivElement>> = (props)
   };
 
   return (
-    <div className={styles.root} style={{margin: props.margin}}>
-      <MUIDivider
-        style={{ border: "1px solid" + colors[color], }}
-      />
+    <div className={styles.root} style={{ margin: props.margin }} {...rest}>
+      <MUIDivider style={{ border: '1px solid' + colors[color] }} />
       {!disableCrop && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -55,6 +55,6 @@ const Divider: React.FC<SectionProps & HTMLAttributes<HTMLDivElement>> = (props)
       )}
     </div>
   );
-}
+};
 
 export default Divider;

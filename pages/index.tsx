@@ -201,11 +201,11 @@ const HomePage: NextPage = () => {
             src={'/static/logo.svg'}
             alt={'elem1'}
             style={{
-              width: 536,
+              width: 525,
               position: 'absolute',
-              top: '66%',
+              top: '65%',
               transform: 'translateY(-100%)',
-              left: '-37%',
+              left: '0%',
             }}
           />
           <img
