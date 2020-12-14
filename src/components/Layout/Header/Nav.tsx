@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { colors } from '@theme';
 import { makeStyles, Theme, Link as MUILink } from '@material-ui/core';
 import clsx from 'clsx';
+import { SearchBox } from 'react-instantsearch-dom';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -15,6 +16,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     zIndex: theme.zIndex.appBar - 1,
   },
+  navLink: {
+    fontWeight: "bold",
+    fontSize: 25,
+    color: theme.palette.background.paper
+  }
 }));
 
 export type NavProps = HTMLAttributes<HTMLDivElement>;
@@ -25,15 +31,15 @@ const Nav: React.FC<NavProps> = ({ ...props }) => {
   return (
     <nav className={styles.root} {...props}>
       <Link href={''} passHref>
-        <MUILink>SEARCH BAR</MUILink>
+        <MUILink className={styles.navLink}>Mes commandes</MUILink>
       </Link>
 
       <Link href={''} passHref>
-        <MUILink>Client</MUILink>
+        <MUILink className={styles.navLink}>Liste des produits</MUILink>
       </Link>
 
       <Link href={''} passHref>
-        <MUILink>Commerçant</MUILink>
+        <MUILink className={styles.navLink}>Liste des commerçant</MUILink>
       </Link>
     </nav>
   );
