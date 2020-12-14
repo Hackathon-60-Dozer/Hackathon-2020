@@ -33,9 +33,9 @@ const AddressField: React.FC<AddressFieldProps> = ({ ...props }) => {
     <TextField
       autoComplete={'off'}
       inputProps={{
-        autocomplete: 'off',
+        autoComplete: 'off',
         form: {
-          autocomplete: 'off',
+          autoComplete: 'off',
         },
       }}
       {...props}

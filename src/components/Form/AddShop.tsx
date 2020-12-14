@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '@hook/useAuth';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -12,6 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
   Button,
+  Checkbox,
+  FormControlLabel,
   Grid,
   InputAdornment,
   TextField,
@@ -26,6 +22,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import dynamic from 'next/dynamic';
 import { Address } from '@types';
+import { labels } from '@constants/shopLabels';
+import { gql, useMutation } from '@apollo/client';
 
 const AddressField = dynamic(() => import('./Field/Address'), {
   ssr: false,
@@ -44,7 +42,6 @@ type FormData = {
 };
 
 const schema = yup.object().shape({
-  // collectPointType: yup.string().required('Ce champ est obligatoire'),
   orgName: yup.string().required('Ce champ est obligatoire'),
   shopName: yup.string().required('Ce champ est obligatoire'),
   siret: yup
@@ -62,8 +59,6 @@ const schema = yup.object().shape({
           let total = 0;
           for (let i = size - 1; i >= 0; i--) {
             const step = (number.charCodeAt(i) - 48) * (bal + 1);
-            /*if (step>9) { step -= 9; }
-             total += step;*/
             total += step > 9 ? step - 9 : step;
             bal = 1 - bal;
           }
@@ -80,13 +75,53 @@ const schema = yup.object().shape({
   labels: yup.array(),
 });
 
+const ADD_SHOP = gql`
+  mutation addShop($input: ShopInput!) {
+    addShop(input: $input)
+  }
+`;
+
+function parseAddress(address: Record<string, any>): Address {
+  const {
+    administrative,
+    city,
+    country,
+    countryCode,
+    county,
+    latlng,
+    postcode,
+    postcodes,
+    value,
+  } = address;
+
+  return {
+    administrative,
+    city,
+    country,
+    countryCode,
+    county,
+    lat: latlng.lat,
+    lng: latlng.lng,
+    postcode,
+    postcodes,
+    value,
+  };
+}
+
 export const AddShopForm: React.FC = () => {
   const router = useRouter();
+  const [addShop] = useMutation(ADD_SHOP);
   const { session, account } = useAuth();
-  const [error, setFormError] = useState();
+  const [error, setFormError] = useState<string>();
 
   const [address, setAddress] = useState({});
-  const { register, handleSubmit, errors, setError } = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    errors,
+    setError,
+    getValues,
+  } = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: 'onChange',
     defaultValues: {
@@ -94,6 +129,8 @@ export const AddShopForm: React.FC = () => {
       ownerLastName: account?.lastName || '',
     },
   });
+
+  console.log(getValues());
 
   const handleAddressChange = useCallback(
     (e: any, name: string) => {
@@ -125,11 +162,27 @@ export const AddShopForm: React.FC = () => {
   const onSubmit = useCallback(
     (values: FormData) => {
       console.log({ values, address });
-    },
-    [address]
-  );
 
-  console.log(errors);
+      schema.validate(values).then((values) => {
+        addShop({
+          variables: {
+            input: {
+              name: values.shopName,
+              address: parseAddress(address.address),
+              organisationName: values.orgName,
+              organisationSiret: values.siret,
+              organisationSiege: parseAddress(address.siegeAddress),
+              labels: values.labels,
+            },
+          },
+        }).catch((e) => {
+          console.error({ ...e });
+          setFormError('Erreur interne.');
+        });
+      });
+    },
+    [addShop, address]
+  );
 
   return (
     <div>
@@ -291,9 +344,16 @@ export const AddShopForm: React.FC = () => {
               }}
             />
           </Grid>
-          {/*<Grid item xs={12}>*/}
-          {/*  <label></label>*/}
-          {/*</Grid>*/}
+          <Grid item xs={12}>
+            {Object.entries(labels).map(([key, label]) => (
+              <FormControlLabel
+                control={
+                  <Checkbox name={'labels'} value={key} inputRef={register} />
+                }
+                label={label}
+              />
+            ))}
+          </Grid>
           <Grid item xs={12} style={{ textAlign: 'center' }}>
             {error && (
               <Typography variant={'body2'} color={'error'}>

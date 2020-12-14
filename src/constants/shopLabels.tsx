@@ -1,9 +1,9 @@
-// export const labels = {
-//   'Fruits/Légumes',
-//   'Céréales',
-//   'Poisson/fruits de mer',
-//   'Produits laitiers',
-//   'Pâtisserie',
-//   'Vénoiserie',
-//   'Viande',
-// };
+export const labels = {
+  vegetables: 'Fruits/Légumes',
+  cereals: 'Céréales',
+  fish: 'Poisson/fruits de mer',
+  milk: 'Produits laitiers',
+  pastries: 'Pâtisserie',
+  viennese: 'Viénnoiserie',
+  meat: 'Viande',
+};
