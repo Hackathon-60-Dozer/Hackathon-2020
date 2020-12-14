@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * From: https://github.com/rajeshdh/react-leaflet-with-nextjs
  */

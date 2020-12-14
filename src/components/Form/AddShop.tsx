@@ -168,9 +168,11 @@ export const AddShopForm: React.FC = () => {
           variables: {
             input: {
               name: values.shopName,
+              // @ts-ignore
               address: parseAddress(address.address),
               organisationName: values.orgName,
               organisationSiret: values.siret,
+              // @ts-ignore
               organisationSiege: parseAddress(address.siegeAddress),
               labels: values.labels,
             },
