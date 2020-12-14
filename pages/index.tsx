@@ -7,6 +7,7 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  InputAdornment,
   makeStyles,
   Paper,
   Theme,
@@ -17,17 +18,25 @@ import {
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
 import dynamic from 'next/dynamic';
 import Section from '@components/Section';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const MapWithNoSSR = dynamic(() => import('@components/Map'), {
+  ssr: false,
+});
+const AddressField = dynamic(() => import('@components/Form/Field/Address'), {
   ssr: false,
 });
 
 const useStyles = makeStyles((theme: Theme) => ({
   hero: {
     display: 'flex',
-    height: 'calc(100vh - 100px)',
+    height: '100vh',
     textAlign: 'left',
     padding: theme.spacing(0, 12),
+    position: 'relative',
+    top: -100,
+    paddingTop: 100,
     '&::before': {
       content: '""',
       backgroundImage: 'url(/static/resources/element6.svg)',
@@ -36,13 +45,17 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundPosition: 'right top',
       display: 'block',
       width: '98%',
-      height: '111%',
+      height: '98%',
       zIndex: '5',
       position: 'absolute',
-      top: 0,
+      top: 100,
       left: 0,
       opacity: 0.11,
     },
+  },
+  heroLeft: {
+    width: '100%',
+    maxWidth: 850,
   },
   heroIcons: {
     width: '100%',
@@ -50,10 +63,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  title: {
-    width: '100%',
-    maxWidth: 1000,
   },
   section: {
     textAlign: 'center',
@@ -193,9 +202,31 @@ const HomePage: NextPage = () => {
   return (
     <Layout disabledContainer>
       <Section id={'hero'} className={styles.hero} color={'grey'} disableCrop>
-        <Typography variant={'h1'} className={styles.title} color={'secondary'}>
-          Retrouvez tous les commerçants près de chez vous
-        </Typography>
+        <div className={styles.heroLeft}>
+          <Typography
+            variant={'h1'}
+            color={'secondary'}
+            style={{ marginBottom: 100 }}>
+            Retrouvez tous les commerçants près de chez vous
+          </Typography>
+          <AddressField
+            placeholder={'Saisissez votre recherche'}
+            variant={'outlined'}
+            id={'address-search-input'}
+            name={'address-search-input'}
+            style={{ width: '80%', marginRight: 20, marginBottom: 12 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FontAwesomeIcon icon={faSearch} />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <Button variant={'contained'} color={'primary'}>
+            Voir les produits
+          </Button>
+        </div>
         <div className={styles.heroIcons}>
           <img
             src={'/static/logo.svg'}

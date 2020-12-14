@@ -7,7 +7,9 @@ import {
   Container,
   ContainerProps,
   makeStyles,
+  Slide,
   Theme,
+  useScrollTrigger,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({

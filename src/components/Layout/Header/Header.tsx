@@ -7,6 +7,8 @@ import {
   Theme,
   Toolbar,
   useMediaQuery,
+  useScrollTrigger,
+  Slide,
 } from '@material-ui/core';
 import Nav from '@components/Layout/Header/Nav';
 import Link from 'next/link';
@@ -18,8 +20,6 @@ import {
   faUserCircle,
   faShoppingBasket,
 } from '@fortawesome/free-solid-svg-icons';
-import HiddenJs from '@material-ui/core/Hidden/HiddenJs';
-import HiddenCss from '@material-ui/core/Hidden/HiddenCss';
 import { Transition } from 'react-transition-group';
 
 const toolbarHeight = 100;
@@ -88,7 +88,7 @@ const Header: React.FC = () => {
   const [deployed, setDeployed] = useState(false);
 
   return (
-    <React.Fragment>
+    <HideOnScroll>
       <AppBar className={styles.root} elevation={0} position={'sticky'}>
         <Toolbar className={styles.toolbar}>
           <IconButton
@@ -138,8 +138,31 @@ const Header: React.FC = () => {
           )}
         </Transition>
       </AppBar>
-    </React.Fragment>
+    </HideOnScroll>
   );
 };
+
+interface Props {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window?: () => Window;
+  children: React.ReactElement;
+}
+
+function HideOnScroll(props: Props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({ target: window ? window() : undefined });
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
 
 export default Header;
