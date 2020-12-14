@@ -28,9 +28,31 @@ export const shopResolver = (id: string): Resolver<ShopType> => async () => {
   return {
     ...shop,
     owner: userResolver(shop.owner),
-    products: Array.from(Array(5).keys()).map(() => {
-      console.log(faker.name.title());
-
+    hours: {
+      mon: [
+        { from: 8, to: 12 },
+        { from: 14, to: 20 },
+      ],
+      tue: [
+        { from: 8, to: 12 },
+        { from: 14, to: 20 },
+      ],
+      wed: [
+        { from: 8, to: 12 },
+        { from: 14, to: 20 },
+      ],
+      thu: [
+        { from: 8, to: 12 },
+        { from: 14, to: 20 },
+      ],
+      fri: [
+        { from: 8, to: 12 },
+        { from: 14, to: 20 },
+      ],
+      sat: [{ from: 8, to: 12 }],
+      sun: [],
+    },
+    products: Array.from(Array(30).keys()).map(() => {
       return {
         name: faker.name.title(),
         price: faker.commerce.price(),

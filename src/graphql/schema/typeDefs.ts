@@ -56,6 +56,7 @@ export const typeDefs = gql`
     name: String!
     address: Address!
     organisation: Organisation!
+    hours: JSONObject!
     labels: [String]!
     products: [Product]!
     commands: [Command]!
