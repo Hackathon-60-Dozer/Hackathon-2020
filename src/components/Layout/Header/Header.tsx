@@ -100,12 +100,14 @@ const Header: React.FC = () => {
             <FontAwesomeIcon icon={faBars} />
           </IconButton>
 
-          <Link href={routes.home.url}>
-            <img
-              className={styles.logo}
-              src={phone ? '/static/logo-full.svg' : '/static/logo.svg'}
-              alt=""
-            />
+          <Link href={routes.home.url} passHref>
+            <a style={{ width: '100%', textAlign: 'center' }}>
+              <img
+                className={styles.logo}
+                src={phone ? '/static/logo-full.svg' : '/static/logo.svg'}
+                alt=""
+              />
+            </a>
           </Link>
 
           <div className={styles.user}>
