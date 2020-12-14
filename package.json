@@ -36,6 +36,7 @@
     "react-instantsearch-dom": "^6.8.2",
     "react-leaflet": "^3.0.2",
     "react-transition-group": "^4.4.1",
+    "recharts": "^1.8.5",
     "yup": "^0.32.8"
   },
   "devDependencies": {

@@ -1,33 +1,29 @@
 import React, { HTMLAttributes } from 'react';
 import {makeStyles, Theme, useTheme} from '@material-ui/core';
-import clsx from 'clsx';
+import MUIDivider from '@material-ui/core/Divider'
 
 export type SectionProps = {
   color?: 'primary' | 'secondary' | 'grey' | 'white';
   disableCrop?: boolean;
+  margin?: string;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
-  section: {
+  root: {
     position: 'relative',
-    width: '100%',
-    textAlign: 'center',
-    padding: theme.spacing(12, 0),
+    width: '90%',
   },
   crop: {
     position: 'absolute',
     right: '10%',
     bottom: 0,
-    height: 20,
+    height: 10,
     transform: 'translateY(100%)',
     zIndex: 100,
   },
 }));
 
-const Section: React.FC<SectionProps & HTMLAttributes<HTMLDivElement>> = ({
-  children,
-  ...props
-}) => {
+const Divider: React.FC<SectionProps & HTMLAttributes<HTMLDivElement>> = (props) => {
   const styles = useStyles();
   const { color, disableCrop, ...rest } = props;
   const theme = useTheme();
@@ -40,11 +36,10 @@ const Section: React.FC<SectionProps & HTMLAttributes<HTMLDivElement>> = ({
   };
 
   return (
-    <section
-      {...rest}
-      style={{ background: colors[color], ...props.style }}
-      className={clsx(styles.section, props.className)}>
-      {children}
+    <div className={styles.root} style={{margin: props.margin}}>
+      <MUIDivider
+        style={{ border: "1px solid" + colors[color], }}
+      />
       {!disableCrop && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -58,8 +53,8 @@ const Section: React.FC<SectionProps & HTMLAttributes<HTMLDivElement>> = ({
           </g>
         </svg>
       )}
-    </section>
+    </div>
   );
-};
+}
 
-export default Section;
+export default Divider;
