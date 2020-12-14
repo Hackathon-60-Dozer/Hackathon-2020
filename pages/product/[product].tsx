@@ -69,7 +69,7 @@ const ProductPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     <Layout maxWidth={'xl'} style={{ padding: 0 }}>
       <figure className={styles.imgContainer}>
         <img
-          src="https://i.picsum.photos/id/9/536/354.jpg?hmac=5PiiV8cCMwZsDl8bYwpetFqtPuNn5uY2WcKTEb5ykW4"
+          src="https://cuisine-saine.fr/wp-content/uploads/2014/03/courge-butternut.jpg"
           alt=""
         />
       </figure>

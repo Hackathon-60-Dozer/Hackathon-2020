@@ -165,7 +165,7 @@ const HomePage: NextPage = () => {
     {
       name: "LegaFruit's",
       labels: ['Vegan', 'Fruits', 'Legumes'],
-      image: 'https://picsum.photos/530/200',
+      image: 'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
     },
   ];
   const markets: Market[] = [
@@ -185,7 +185,7 @@ const HomePage: NextPage = () => {
   const labels: Label[] = [
     {
       name: 'Fruits et légumes',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
     },
     {
       name: 'produits laitiers',

@@ -1,5 +1,5 @@
 import React from "react";
-import {makeStyles, Theme, Typography} from "@material-ui/core";
+import {Button, makeStyles, Theme, Typography} from "@material-ui/core";
 import {NextPage} from "next";
 import Cookies from 'js-cookie'
 import Layout from "@components/Layout/Layout";
@@ -116,6 +116,7 @@ const Basket : NextPage = () => {
             <Typography variant={"body1"} color={"primary"}>8.15€</Typography>
           </div>
         </div>
+        <Button variant={"contained"} color={"secondary"} style={{margin: 30}}>Passer ma commande</Button>
       </Section>
 
     </Layout>
