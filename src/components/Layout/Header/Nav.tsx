@@ -45,31 +45,4 @@ const Nav: React.FC<NavProps> = ({ ...props }) => {
   );
 };
 
-// const Menu = styled.div`
-//   color: ${(props) => props.theme.colors.light};
-//   padding: 20px;
-//   padding-bottom: 45px;
-//   width: 100%;
-//   z-index: -1;
-//   background: ${(props) => props.theme.colors.secondary};
-//   position: absolute;
-//   transform: translate3d(0, -100%, 0);
-//   transition: 0.7s;
-//   display: flex;
-//   justify-content: space-around;
-//
-//   &.deployed {
-//     transform: translate3d(0, 0, 0);
-//     padding-bottom: 20px;
-//   }
-//
-//   section {
-//     margin: 20px;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//   }
-// `;
-//
-
 export default Nav;
