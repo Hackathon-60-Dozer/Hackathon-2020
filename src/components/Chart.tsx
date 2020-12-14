@@ -1,7 +1,14 @@
 import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import {Typography} from "@material-ui/core";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Label,
+  ResponsiveContainer,
+} from 'recharts';
+import { Typography } from '@material-ui/core';
 
 // Generate Sales Data
 function createData(time, amount) {
@@ -25,7 +32,12 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Typography variant={"h4"} color={"secondary"} style={{marginBottom: -15}}>Vos ventes</Typography>
+      <Typography
+        variant={'h4'}
+        color={'secondary'}
+        style={{ marginBottom: -15 }}>
+        Vos ventes
+      </Typography>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -34,19 +46,25 @@ export default function Chart() {
             right: 16,
             bottom: 0,
             left: 24,
-          }}
-        >
+          }}>
           <XAxis dataKey="time" stroke={theme.palette.secondary.main} />
           <YAxis stroke={theme.palette.secondary.main}>
             <Label
               angle={270}
               position="left"
-              style={{ textAnchor: 'middle', fill: theme.palette.secondary.main }}
-            >
+              style={{
+                textAnchor: 'middle',
+                fill: theme.palette.secondary.main,
+              }}>
               Sales ($)
             </Label>
           </YAxis>
-          <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
+          <Line
+            type="monotone"
+            dataKey="amount"
+            stroke={theme.palette.primary.main}
+            dot={false}
+          />
         </LineChart>
       </ResponsiveContainer>
     </React.Fragment>

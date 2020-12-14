@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import {makeStyles, Theme, useTheme} from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core';
 import clsx from 'clsx';
 
 export type SectionProps = {

@@ -50,7 +50,7 @@ const AlgoliaSearch: React.FC<{ title: string }> = ({ title }) => {
 function Hit(props) {
   return (
     <div>
-      <img src={props.hit.image} align="left" alt={props.hit.name} />
+      <img src={props.hit.image} alt={props.hit.name} />
       <div className="hit-name">
         <Highlight attribute="name" hit={props.hit} />
       </div>

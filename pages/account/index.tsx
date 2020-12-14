@@ -1,174 +1,189 @@
-import React from "react";
+import React from 'react';
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  IconButton,
   Link,
   makeStyles,
   Theme,
-  Typography
-} from "@material-ui/core";
-import {NextPage} from "next";
-import Layout from "@components/Layout/Layout";
-import {faChevronDown, faChevronRight} from "@fortawesome/free-solid-svg-icons";
+  Typography,
+} from '@material-ui/core';
+import { NextPage } from 'next';
+import Layout from '@components/Layout/Layout';
+import {
+  faChevronDown,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Divider from "@components/Divider";
+import Divider from '@components/Divider';
+import routes from '@constants/routes';
+import { useAuth } from '@hook/useAuth';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   hero: {
     marginBottom: 100,
     padding: 0,
-    width: "100%",
+    width: '100%',
 
-    "& figure": {
+    '& figure': {
       padding: 0,
       margin: 0,
       height: 150,
 
-      "& img": {
-        width: "100%",
-        height: "100%",
-        objectFit: "cover"
-      }
-    }
+      '& img': {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+      },
+    },
   },
   secondHeroContainer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     zIndex: 1,
 
-    "& figure": {
-      overflow: "hidden",
-      borderRadius: "50%",
+    '& figure': {
+      overflow: 'hidden',
+      borderRadius: '50%',
       marginTop: -100,
       height: 200,
       width: 200,
 
-      "& img": {
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        objectPosition: "center",
-      }
-    }
+      '& img': {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        objectPosition: 'center',
+      },
+    },
   },
   heading: {
     fontSize: 20,
-    fontWeight: "bold",
-    textTransform: "uppercase",
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
     color: theme.palette.secondary.main,
-
   },
   accordion: {
-    width: "50vw",
-    borderBottom: "2px solid " + theme.palette.background.paper,
-    background: "none",
-    boxShadow: "none",
-    border: "none",
+    width: '50vw',
+    borderBottom: '2px solid ' + theme.palette.background.paper,
+    background: 'none',
+    boxShadow: 'none',
+    border: 'none',
 
-    "&::before": {
-      content: "none"
-    }
+    '&::before': {
+      content: 'none',
+    },
   },
   link: {
-    alignSelf: "center",
-  }
-}))
+    alignSelf: 'center',
+  },
+}));
 
 const Index: NextPage = () => {
-
-  const styles = useStyles()
-
+  const { logout } = useAuth();
+  const styles = useStyles();
 
   return (
-    <Layout maxWidth={"xl"} style={{width: "100%", padding: 0, margin: 0}}>
+    <Layout maxWidth={'xl'} style={{ width: '100%', padding: 0, margin: 0 }}>
       <div className={styles.hero}>
         <figure>
-          <img src="https://www.lanouvelle.net/wp-content/uploads/sites/5/2017/11/ft-24032017-fruits-legumes-1024x678.jpg" alt=""/>
+          <img
+            src="https://www.lanouvelle.net/wp-content/uploads/sites/5/2017/11/ft-24032017-fruits-legumes-1024x678.jpg"
+            alt=""
+          />
         </figure>
 
         <div className={styles.secondHeroContainer}>
           <figure>
-            <img src="https://randomuser.me/api/portraits/men/61.jpg" alt=""/>
+            <img src="https://randomuser.me/api/portraits/men/61.jpg" alt="" />
           </figure>
 
-          <Typography variant={"h5"} color={"primary"} style={{marginTop: 20, fontWeight: "bold"}}>Bonjour,</Typography>
-          <Typography color={"primary"}>NOM_USER</Typography>
+          <Typography
+            variant={'h5'}
+            color={'primary'}
+            style={{ marginTop: 20, fontWeight: 'bold' }}>
+            Bonjour,
+          </Typography>
+          <Typography color={'primary'}>NOM_USER</Typography>
         </div>
       </div>
 
-      <Accordion className={styles.accordion} style={{margin: 0}}>
+      <Accordion className={styles.accordion} style={{ margin: 0 }}>
         <AccordionSummary
-          expandIcon={<FontAwesomeIcon icon={faChevronDown}/>}
+          expandIcon={<FontAwesomeIcon icon={faChevronDown} />}
           aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
+          id="panel1a-header">
           <Typography className={styles.heading}>Mes informations</Typography>
         </AccordionSummary>
-        <AccordionDetails style={{color: "#e18380", flexDirection: "column"}}>
-          <Typography variant={"body1"} gutterBottom>
-            <span style={{fontWeight: "bold"}}>Nom:</span> DOE
+        <AccordionDetails style={{ color: '#e18380', flexDirection: 'column' }}>
+          <Typography variant={'body1'} gutterBottom>
+            <span style={{ fontWeight: 'bold' }}>Nom:</span> DOE
           </Typography>
-          <Typography variant={"body1"} gutterBottom>
-            <span style={{fontWeight: "bold"}}>Prénom:</span> JOHN
+          <Typography variant={'body1'} gutterBottom>
+            <span style={{ fontWeight: 'bold' }}>Prénom:</span> JOHN
           </Typography>
-          <Typography variant={"body1"} gutterBottom>
-            <span style={{fontWeight: "bold"}}>Email:</span> JOHNDOE@example.com
+          <Typography variant={'body1'} gutterBottom>
+            <span style={{ fontWeight: 'bold' }}>Email:</span>{' '}
+            JOHNDOE@example.com
           </Typography>
         </AccordionDetails>
       </Accordion>
 
-      <Divider color={"primary"} margin={"50px"}/>
+      <Divider color={'primary'} margin={'50px'} />
 
-      <Link href={""} className={styles.link}>
-        <Accordion className={styles.accordion} style={{margin: 0}}>
+      <Link href={routes.accountCommands.url} className={styles.link}>
+        <Accordion className={styles.accordion} style={{ margin: 0 }}>
           <AccordionSummary
-            expandIcon={<FontAwesomeIcon icon={faChevronRight}/>}
+            expandIcon={<FontAwesomeIcon icon={faChevronRight} />}
             aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
+            id="panel1a-header">
             <Typography className={styles.heading}>Mes commandes</Typography>
           </AccordionSummary>
-          <AccordionDetails>
-          </AccordionDetails>
+          <AccordionDetails></AccordionDetails>
         </Accordion>
       </Link>
 
-      <Link href={""} className={styles.link}>
-        <Accordion className={styles.accordion} style={{margin: 0}}>
+      <Link href={routes.basket.url} className={styles.link}>
+        <Accordion className={styles.accordion} style={{ margin: 0 }}>
           <AccordionSummary
-            expandIcon={<FontAwesomeIcon icon={faChevronRight}/>}
+            expandIcon={<FontAwesomeIcon icon={faChevronRight} />}
             aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={styles.heading}>mon panier</Typography>
+            id="panel1a-header">
+            <Typography className={styles.heading}>Mon panier</Typography>
           </AccordionSummary>
-          <AccordionDetails>
-          </AccordionDetails>
+          <AccordionDetails></AccordionDetails>
         </Accordion>
       </Link>
 
-      <Link href={""} className={styles.link} style={{marginBottom: 50}}>
-        <Accordion className={styles.accordion} style={{margin: 0}}>
+      <button
+        onClick={() => {
+          logout();
+        }}
+        className={styles.link}
+        style={{
+          marginBottom: 50,
+          border: 0,
+          outline: 'none',
+          background: 'none',
+        }}>
+        <Accordion className={styles.accordion} style={{ margin: 0 }}>
           <AccordionSummary
-            expandIcon={<FontAwesomeIcon icon={faChevronRight}/>}
+            expandIcon={<FontAwesomeIcon icon={faChevronRight} />}
             aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={styles.heading} style={{color: "#e18380"}}>se déconnecter</Typography>
+            id="panel1a-header">
+            <Typography className={styles.heading} style={{ color: '#e18380' }}>
+              se déconnecter
+            </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-          </AccordionDetails>
+          <AccordionDetails></AccordionDetails>
         </Accordion>
-      </Link>
-
+      </button>
     </Layout>
   );
-}
+};
 
-export default Index
+export default Index;

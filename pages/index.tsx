@@ -14,12 +14,15 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Link as MUILink,
 } from '@material-ui/core';
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
 import dynamic from 'next/dynamic';
 import Section from '@components/Section';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import routes from '@constants/routes';
+import Link from 'next/link';
 
 const MapWithNoSSR = dynamic(() => import('@components/Map'), {
   ssr: false,
@@ -155,49 +158,59 @@ const HomePage: NextPage = () => {
     {
       name: 'Boulangerie du Midi',
       labels: ['Vegan'],
-      image: 'https://fr.rc-cdn.community.thermomix.com/recipeimage/evs5k5in-21c05-024863-cfcd2-71r3w15i/ec37d89a-70b3-41c6-a5c1-cee9603cefb8/main/pain-du-boulanger.jpg',
+      image:
+        'https://fr.rc-cdn.community.thermomix.com/recipeimage/evs5k5in-21c05-024863-cfcd2-71r3w15i/ec37d89a-70b3-41c6-a5c1-cee9603cefb8/main/pain-du-boulanger.jpg',
     },
     {
       name: 'Boucherie du petit chiot',
       labels: ['Viande'],
-      image: 'https://www.leparisien.fr/resizer/YowlAfDGcdQHYtmWAuGGVtspn1Y=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/4W2SZRDAV4U2EU65QDP4ZPK4TA.jpg',
+      image:
+        'https://www.leparisien.fr/resizer/YowlAfDGcdQHYtmWAuGGVtspn1Y=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/4W2SZRDAV4U2EU65QDP4ZPK4TA.jpg',
     },
     {
       name: "LegaFruit's",
       labels: ['Vegan', 'Fruits', 'Legumes'],
-      image: 'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
+      image:
+        'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
     },
   ];
   const markets: Market[] = [
     {
       name: 'Marché des Carmes',
-      image: 'https://www.notretemps.com/cache/com_zoo_images/de/farines-sans-gluten_0d131f6c146e6281298a10ac2913b974.jpg',
+      image:
+        'https://www.notretemps.com/cache/com_zoo_images/de/farines-sans-gluten_0d131f6c146e6281298a10ac2913b974.jpg',
     },
     {
       name: 'Marché de saint aubin',
-      image: 'https://www.foodette.fr/wp-content/uploads/2014/10/plateau_fromage_M.studio-fotolia.jpg',
+      image:
+        'https://www.foodette.fr/wp-content/uploads/2014/10/plateau_fromage_M.studio-fotolia.jpg',
     },
     {
       name: 'Marché de saint cyprien',
-      image: 'https://www.leparisien.fr/resizer/YowlAfDGcdQHYtmWAuGGVtspn1Y=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/4W2SZRDAV4U2EU65QDP4ZPK4TA.jpg',
+      image:
+        'https://www.leparisien.fr/resizer/YowlAfDGcdQHYtmWAuGGVtspn1Y=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/4W2SZRDAV4U2EU65QDP4ZPK4TA.jpg',
     },
   ];
   const labels: Label[] = [
     {
       name: 'Fruits et légumes',
-      image: 'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
+      image:
+        'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
     },
     {
       name: 'produits laitiers',
-      image: 'https://www.foodette.fr/wp-content/uploads/2014/10/plateau_fromage_M.studio-fotolia.jpg',
+      image:
+        'https://www.foodette.fr/wp-content/uploads/2014/10/plateau_fromage_M.studio-fotolia.jpg',
     },
     {
       name: 'Viande poisson',
-      image: 'https://www.leparisien.fr/resizer/YowlAfDGcdQHYtmWAuGGVtspn1Y=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/4W2SZRDAV4U2EU65QDP4ZPK4TA.jpg',
+      image:
+        'https://www.leparisien.fr/resizer/YowlAfDGcdQHYtmWAuGGVtspn1Y=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/4W2SZRDAV4U2EU65QDP4ZPK4TA.jpg',
     },
     {
       name: 'Céréales et farines',
-      image: 'https://www.notretemps.com/cache/com_zoo_images/de/farines-sans-gluten_0d131f6c146e6281298a10ac2913b974.jpg',
+      image:
+        'https://www.notretemps.com/cache/com_zoo_images/de/farines-sans-gluten_0d131f6c146e6281298a10ac2913b974.jpg',
     },
   ];
 
@@ -314,12 +327,15 @@ const HomePage: NextPage = () => {
             </Card>
           ))}
         </Carousel>
-        <Button
-          className={styles.sectionButton}
-          variant={'contained'}
-          color={'secondary'}>
-          Voir tous les produits
-        </Button>
+
+        <Link href={routes.productList.url} passHref>
+          <Button
+            className={styles.sectionButton}
+            variant={'contained'}
+            color={'secondary'}>
+            Voir tous les produits
+          </Button>
+        </Link>
       </Section>
 
       <Section id={'map'} className={styles.section} color={'secondary'}>
@@ -380,12 +396,14 @@ const HomePage: NextPage = () => {
             </Card>
           ))}
         </Carousel>
-        <Button
-          className={styles.sectionButton}
-          variant={'contained'}
-          color={'secondary'}>
-          Voir tous les commerçants
-        </Button>
+        <Link href={routes.shopList.url} passHref>
+          <Button
+            className={styles.sectionButton}
+            variant={'contained'}
+            color={'secondary'}>
+            Voir tous les commerçants
+          </Button>
+        </Link>
       </Section>
 
       <Section id={'shops'} className={styles.section} color={'secondary'}>

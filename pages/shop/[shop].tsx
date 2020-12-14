@@ -24,6 +24,7 @@ import { gql } from '@apollo/client';
 import { initializeApollo } from '@services/apollo/client';
 import { Shop } from '@types';
 import Section from '@components/Section';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme: Theme) => ({
   firstContainer: {
@@ -104,8 +105,8 @@ const days = {
 const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   shop,
 }) => {
+  const router = useRouter();
   const styles = useStyles();
-  const matches = useMediaQuery((theme: Theme) => theme.breakpoints.down('xs'));
 
   return (
     <Layout maxWidth={'lg'}>
@@ -169,10 +170,12 @@ const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <div className={styles.products}>
           {shop.products.map((product, i) => (
             <Card key={i} className={styles.card}>
-              <CardActionArea>
+              <CardActionArea onClick={() => router.push('/product/test')}>
                 <CardMedia
                   className={styles.cardMedia}
-                  image={'https://fr.rc-cdn.community.thermomix.com/recipeimage/evs5k5in-21c05-024863-cfcd2-71r3w15i/ec37d89a-70b3-41c6-a5c1-cee9603cefb8/main/pain-du-boulanger.jpg'}
+                  image={
+                    'https://fr.rc-cdn.community.thermomix.com/recipeimage/evs5k5in-21c05-024863-cfcd2-71r3w15i/ec37d89a-70b3-41c6-a5c1-cee9603cefb8/main/pain-du-boulanger.jpg'
+                  }
                   title={product.name}
                 />
                 <CardContent className={styles.cardContent}>

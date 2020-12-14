@@ -130,9 +130,15 @@ const Header: React.FC = () => {
                 <FontAwesomeIcon icon={faUserCircle} />
               </IconButton>
             </Link>
-            <IconButton color={'primary'} className={styles.icon}>
-              <FontAwesomeIcon icon={faShoppingBasket} />
-            </IconButton>
+
+            <Link href={routes.basket.url} passHref>
+              <IconButton
+                component={MUILink}
+                color={'primary'}
+                className={styles.icon}>
+                <FontAwesomeIcon icon={faShoppingBasket} />
+              </IconButton>
+            </Link>
           </div>
         </Toolbar>
 

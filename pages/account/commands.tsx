@@ -1,11 +1,10 @@
-
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import {NextPage} from "next";
+import { NextPage } from 'next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
-import Layout from "@components/Layout/Layout";
-import {inspect} from "util";
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Layout from '@components/Layout/Layout';
+import { inspect } from 'util';
 import {
   makeStyles,
   Typography,
@@ -14,25 +13,26 @@ import {
   useMediaQuery,
   Card,
   CardActionArea,
-  CardMedia, CardContent
-} from "@material-ui/core";
-import Section from "@components/Section";
-import Divider from "@components/Divider";
-import theme, {colors} from "@theme";
-import {useRouter} from "next/router";
-import Carousel, {slidesToShowPlugin} from "@brainhubeu/react-carousel";
+  CardMedia,
+  CardContent,
+} from '@material-ui/core';
+import Section from '@components/Section';
+import Divider from '@components/Divider';
+import theme, { colors } from '@theme';
+import { useRouter } from 'next/router';
+import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
 
 const useStyles = makeStyles((theme: Theme) => ({
   sectionTitle: {
-    textAlign: 'left'
+    textAlign: 'left',
   },
   backButton: {
-    display: "none",
+    display: 'none',
     fontSize: 40,
     margin: theme.spacing(2, 10),
     color: theme.palette.primary.main,
-    cursor: "pointer",
-    position: "absolute"
+    cursor: 'pointer',
+    position: 'absolute',
   },
   carousel: {
     width: '90vw',
@@ -77,8 +77,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '100%',
       fontSize: '1rem',
     },
-  }
-}))
+  },
+}));
 
 interface Label {
   name: string;
@@ -86,28 +86,31 @@ interface Label {
 }
 
 const Commands: NextPage = () => {
-
-  const [commands, setCommands] = useState({})
-  const router = useRouter()
+  const [commands, setCommands] = useState({});
+  const router = useRouter();
 
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
 
   const labels: Label[] = [
     {
       name: '14/12/2020  19.90 €',
-      image: 'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
+      image:
+        'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
     },
     {
       name: '14/12/2020  19.90 €',
-      image: 'https://supplyshop.fr/wp-content/uploads/2019/09/67-panier-fruits-legumes.jpg',
+      image:
+        'https://supplyshop.fr/wp-content/uploads/2019/09/67-panier-fruits-legumes.jpg',
     },
     {
       name: '14/12/2020  19.90 €',
-      image: 'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
+      image:
+        'https://supplyshop.fr/wp-content/uploads/2019/11/paniers-fruits-legumes-caen-1.jpg',
     },
     {
       name: '14/12/2020  19.90 €',
-      image: 'https://supplyshop.fr/wp-content/uploads/2019/09/67-panier-fruits-legumes.jpg',
+      image:
+        'https://supplyshop.fr/wp-content/uploads/2019/09/67-panier-fruits-legumes.jpg',
     },
   ];
 
@@ -115,18 +118,27 @@ const Commands: NextPage = () => {
 
   return (
     <Layout>
-      <Section color={'white'} style={{padding: 20}}>
+      <Section color={'white'} style={{ padding: 20 }}>
         <IconButton
           onClick={() => {
-            router.back()
-          }}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} className={styles.backButton}/>
+            router.back();
+          }}>
+          <FontAwesomeIcon icon={faArrowLeft} className={styles.backButton} />
         </IconButton>
-        <Typography variant={'h1'} color={'secondary'} style={{textAlign: "center", width: "100%"}}>Mes commandes</Typography>
-        <Divider color={"grey"} margin={"30px"}/>
+        <Typography
+          variant={'h1'}
+          color={'secondary'}
+          style={{ textAlign: 'center', width: '100%' }}>
+          Mes commandes
+        </Typography>
+        <Divider color={'grey'} margin={'30px'} />
 
-        <Typography variant={'h2'} className={styles.sectionTitle} color={'secondary'}>En cours :</Typography>
+        <Typography
+          variant={'h2'}
+          className={styles.sectionTitle}
+          color={'secondary'}>
+          En cours :
+        </Typography>
 
         <Carousel
           className={styles.carousel}
@@ -165,8 +177,13 @@ const Commands: NextPage = () => {
           ))}
         </Carousel>
 
-        <Divider color={"grey"} margin={"30px"}/>
-        <Typography variant={'h2'} className={styles.sectionTitle} color={'secondary'}>Récupérées :</Typography>
+        <Divider color={'grey'} margin={'30px'} />
+        <Typography
+          variant={'h2'}
+          className={styles.sectionTitle}
+          color={'secondary'}>
+          Récupérées :
+        </Typography>
 
         <Carousel
           className={styles.carousel}
@@ -206,7 +223,7 @@ const Commands: NextPage = () => {
         </Carousel>
       </Section>
     </Layout>
-  )
-}
+  );
+};
 
-export default Commands
+export default Commands;

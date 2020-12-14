@@ -1,81 +1,92 @@
-import React from "react";
+import React from 'react';
 import {
   Accordion,
   AccordionDetails,
-  AccordionSummary, Button, Card, CardActionArea, CardContent, CardMedia, Grid,
+  AccordionSummary,
+  Button,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Grid,
   IconButton,
   Link,
   makeStyles,
   Theme,
-  Typography, useMediaQuery
-} from "@material-ui/core";
-import {NextPage} from "next";
-import Layout from "@components/Layout/Layout";
-import {faChevronDown, faChevronRight, faPen} from "@fortawesome/free-solid-svg-icons";
+  Typography,
+  useMediaQuery,
+} from '@material-ui/core';
+import { NextPage } from 'next';
+import Layout from '@components/Layout/Layout';
+import {
+  faChevronDown,
+  faChevronRight,
+  faPen,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Divider from "@components/Divider";
-import Section from "@components/Section";
-import Chart from "@components/Chart";
-import Carousel, {slidesToShowPlugin} from "@brainhubeu/react-carousel";
-import theme from "@theme";
+import Divider from '@components/Divider';
+import Section from '@components/Section';
+import Chart from '@components/Chart';
+import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
+import theme from '@theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   hero: {
     marginBottom: 100,
     padding: 0,
-    width: "100%",
+    width: '100%',
 
-    "& figure": {
+    '& figure': {
       padding: 0,
       margin: 0,
       height: 150,
 
-      "& img": {
-        width: "100%",
-        height: "100%",
-        objectFit: "cover"
-      }
-    }
+      '& img': {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+      },
+    },
   },
   secondHeroContainer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     zIndex: 1,
 
-    "& figure": {
-      overflow: "hidden",
-      borderRadius: "50%",
+    '& figure': {
+      overflow: 'hidden',
+      borderRadius: '50%',
       marginTop: -100,
       height: 200,
       width: 200,
 
-      "& img": {
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        objectPosition: "center",
-      }
-    }
+      '& img': {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        objectPosition: 'center',
+      },
+    },
   },
 
   insightContainer: {
-    width: "74%",
-    marginLeft: "12%",
-    padding: 20
+    width: '74%',
+    marginLeft: '12%',
+    padding: 20,
   },
   gridElement: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
-    background: "#fafafa",
-    width: "100%",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    background: '#fafafa',
+    width: '100%',
     height: 250,
     borderRadius: 15,
-    boxShadow: "0 0 5px 0 rgba(0,0,0,0.25)"
+    boxShadow: '0 0 5px 0 rgba(0,0,0,0.25)',
   },
   carousel: {
     width: '90vw',
@@ -132,7 +143,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 0,
     margin: 'auto',
   },
-}))
+}));
 
 interface Label {
   name: string;
@@ -140,93 +151,149 @@ interface Label {
 }
 
 const Index: NextPage = () => {
-
-  const styles = useStyles()
+  const styles = useStyles();
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
 
   const labels: Label[] = [
     {
       name: 'Potimaron',
-      image: 'https://cuisine-saine.fr/wp-content/uploads/2014/03/courge-butternut.jpg',
+      image:
+        'https://cuisine-saine.fr/wp-content/uploads/2014/03/courge-butternut.jpg',
     },
     {
       name: 'Poisson',
-      image: 'https://media.gerbeaud.net/2019/11/640/amphiprion-ocellaris-poisson-clown-pacifique.jpg',
+      image:
+        'https://media.gerbeaud.net/2019/11/640/amphiprion-ocellaris-poisson-clown-pacifique.jpg',
     },
     {
       name: 'Courgette',
-      image: 'https://media.gerbeaud.net/2019/11/640/amphiprion-ocellaris-poisson-clown-pacifique.jpg',
+      image:
+        'https://media.gerbeaud.net/2019/11/640/amphiprion-ocellaris-poisson-clown-pacifique.jpg',
     },
     {
       name: 'Pomme de terre',
-      image: 'https://cdn4.fermedesaintemarthe.com/I-Autre-25748_1200x1200-pomme-de-terre-laurette-ab.net.jpg',
+      image:
+        'https://cdn4.fermedesaintemarthe.com/I-Autre-25748_1200x1200-pomme-de-terre-laurette-ab.net.jpg',
     },
   ];
 
-
   return (
-    <Layout maxWidth={"xl"} style={{width: "100%", padding: 0, margin: 0}}>
-      <Section className={styles.hero} color={"white"}>
+    <Layout maxWidth={'xl'} style={{ width: '100%', padding: 0, margin: 0 }}>
+      <Section className={styles.hero} color={'white'}>
         <figure>
-          <img src="https://northernlifemagazine.co.uk/wp-content/uploads/2019/08/Community-Shop-twitter.jpg" alt=""/>
+          <img
+            src="https://northernlifemagazine.co.uk/wp-content/uploads/2019/08/Community-Shop-twitter.jpg"
+            alt=""
+          />
         </figure>
 
         <div className={styles.secondHeroContainer}>
           <figure>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSafcfc-8PuUquB4iS9Xtvy9oXursOo9AHZBg&usqp=CAU" alt=""/>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSafcfc-8PuUquB4iS9Xtvy9oXursOo9AHZBg&usqp=CAU"
+              alt=""
+            />
           </figure>
 
-          <Typography variant={"h5"} color={"primary"} style={{marginTop: 20, fontWeight: "bold"}}>Bienvenue,</Typography>
-          <Typography color={"primary"}>Votre espace vendeur</Typography>
+          <Typography
+            variant={'h5'}
+            color={'primary'}
+            style={{ marginTop: 20, fontWeight: 'bold' }}>
+            Bienvenue,
+          </Typography>
+          <Typography color={'primary'}>Votre espace vendeur</Typography>
         </div>
       </Section>
 
-      <Divider color={"grey"}/>
+      <Divider color={'grey'} />
 
-      <Section color={"secondary"}>
-        <Typography variant={"h2"} color={"textSecondary"} style={{fontSize: 30, marginBottom: 10}}>Vos insights <FontAwesomeIcon icon={faPen} style={{color: "#e18380"}}/></Typography>
+      <Section color={'secondary'}>
+        <Typography
+          variant={'h2'}
+          color={'textSecondary'}
+          style={{ fontSize: 30, marginBottom: 10 }}>
+          Vos insights{' '}
+          <FontAwesomeIcon icon={faPen} style={{ color: '#e18380' }} />
+        </Typography>
         <div className={styles.insightContainer}>
-          <Grid container spacing={3} direction={"row"}>
+          <Grid container spacing={3} direction={'row'}>
             <Grid item xs={6}>
               <div className={styles.gridElement}>
-                <Typography variant={"h3"} color={"secondary"}>Commandes en attente</Typography>
-                <Typography variant={"body1"} color={"primary"}style={{fontSize: 50}}>16</Typography>
+                <Typography variant={'h3'} color={'secondary'}>
+                  Commandes en attente
+                </Typography>
+                <Typography
+                  variant={'body1'}
+                  color={'primary'}
+                  style={{ fontSize: 50 }}>
+                  16
+                </Typography>
               </div>
             </Grid>
 
             <Grid item xs={6}>
               <div className={styles.gridElement}>
-                <Typography variant={"h3"} color={"secondary"}>Commandes traitées hier</Typography>
-                <Typography variant={"body1"} color={"primary"}style={{fontSize: 50}}>42</Typography>
+                <Typography variant={'h3'} color={'secondary'}>
+                  Commandes traitées hier
+                </Typography>
+                <Typography
+                  variant={'body1'}
+                  color={'primary'}
+                  style={{ fontSize: 50 }}>
+                  42
+                </Typography>
               </div>
             </Grid>
 
             <Grid item xs={6}>
               <div className={styles.gridElement}>
-                <Typography variant={"h3"} color={"secondary"}>Nouveaux avis</Typography>
-                <Typography variant={"body1"} color={"primary"}style={{fontSize: 50}}>2</Typography>
+                <Typography variant={'h3'} color={'secondary'}>
+                  Nouveaux avis
+                </Typography>
+                <Typography
+                  variant={'body1'}
+                  color={'primary'}
+                  style={{ fontSize: 50 }}>
+                  2
+                </Typography>
               </div>
             </Grid>
 
             <Grid item xs={6}>
               <div className={styles.gridElement}>
-                <Typography variant={"h3"} color={"secondary"}>Panier moyen</Typography>
-                <Typography variant={"body1"} color={"primary"}style={{fontSize: 50}}>38.02 €</Typography>
+                <Typography variant={'h3'} color={'secondary'}>
+                  Panier moyen
+                </Typography>
+                <Typography
+                  variant={'body1'}
+                  color={'primary'}
+                  style={{ fontSize: 50 }}>
+                  38.02 €
+                </Typography>
               </div>
             </Grid>
 
             <Grid item xs={12}>
-              <Typography variant={"h3"} color={"secondary"}>Vos ventes</Typography>
-              <div style={{height: 400, padding: 25}} className={styles.gridElement}>
-                <Chart/>
+              <Typography variant={'h3'} color={'secondary'}>
+                Vos ventes
+              </Typography>
+              <div
+                style={{ height: 400, padding: 25 }}
+                className={styles.gridElement}>
+                <Chart />
               </div>
             </Grid>
           </Grid>
         </div>
       </Section>
 
-      <Section color={"white"}>
-        <Typography variant={"h2"} color={"secondary"} style={{marginBottom: 20}}>Vos produits</Typography>
+      <Section color={'white'}>
+        <Typography
+          variant={'h2'}
+          color={'secondary'}
+          style={{ marginBottom: 20 }}>
+          Vos produits
+        </Typography>
 
         <Carousel
           className={styles.carousel}
@@ -265,24 +332,29 @@ const Index: NextPage = () => {
           ))}
         </Carousel>
 
-        <Button style={{marginTop: 40}}>Ajouter des produits</Button>
-
+        <Button style={{ marginTop: 40 }}>Ajouter des produits</Button>
       </Section>
 
-      <Divider color={"grey"} margin={"30px"}/>
+      <Divider color={'grey'} margin={'30px'} />
 
-      <Section style={{}} color={"white"}>
-        <ul style={{listStyle: "none"}}>
-          <li><Button>Historique des commandes</Button>
-          <li><Button>Modifier les informations boutique</Button></li>
-          <li><Button>Support technique</Button></li>
-          <li><Button color={"primary"}>Déconnexion</Button></li></li>
+      <Section style={{}} color={'white'}>
+        <ul style={{ listStyle: 'none' }}>
+          <li>
+            <Button>Historique des commandes</Button>
+            <li>
+              <Button>Modifier les informations boutique</Button>
+            </li>
+            <li>
+              <Button>Support technique</Button>
+            </li>
+            <li>
+              <Button color={'primary'}>Déconnexion</Button>
+            </li>
+          </li>
         </ul>
       </Section>
-
-
     </Layout>
   );
-}
+};
 
-export default Index
+export default Index;

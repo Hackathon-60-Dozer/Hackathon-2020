@@ -7,13 +7,12 @@ import { useAuth } from '@hook/useAuth';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Input from '@components/Input';
-import Button from '@components/Button';
 import yup from '@yup';
 import { gql, useMutation } from '@apollo/client';
 import translations from '@translations';
 import routes, { rootUrl } from '@constants/routes';
 import { setToken } from '@services/apollo/client';
+import { Button, TextField } from '@material-ui/core';
 
 initializeFirebase();
 
@@ -97,7 +96,7 @@ export const SignUpForm: React.FC = () => {
                   router.push(redirectUrl);
                 })
                 .catch(() => {
-                  setError(translations.errors.internal);
+                  setError('Erreur interne.');
                 });
             });
         }
@@ -126,7 +125,7 @@ export const SignUpForm: React.FC = () => {
           router.push('/');
         })
         .catch((e) => {
-          setError(translations.errors.internal);
+          setError('Erreur interne');
         });
     },
     [router, signUp]
@@ -135,44 +134,44 @@ export const SignUpForm: React.FC = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Input
+        <TextField
           label={'Prénom'}
           name={'firstName'}
           id={'firstName'}
           type={'text'}
-          error={errors?.firstName?.message}
+          helperText={errors?.firstName?.message}
           inputRef={register}
         />
-        <Input
+        <TextField
           label={'Nom'}
           name={'lastName'}
           id={'lastName'}
           type={'text'}
-          error={errors?.lastName?.message}
+          helperText={errors?.lastName?.message}
           inputRef={register}
         />
-        <Input
+        <TextField
           label={'Email'}
           name={'email'}
           id={'email'}
           type={'email'}
-          error={errors?.email?.message}
+          helperText={errors?.email?.message}
           inputRef={register}
         />
-        <Input
+        <TextField
           label={'Mot de passe'}
           name={'plainPassword'}
           id={'plainPassword'}
           type={'password'}
-          error={errors?.plainPassword?.message}
+          helperText={errors?.plainPassword?.message}
           inputRef={register}
         />
-        <Input
+        <TextField
           label={'Confirmer le mot de passe'}
           name={'plainPasswordConfirm'}
           id={'plainPasswordConfirm'}
           type={'password'}
-          error={errors?.plainPasswordConfirm?.message}
+          helperText={errors?.plainPasswordConfirm?.message}
           inputRef={register}
         />
 
