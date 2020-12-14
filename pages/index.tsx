@@ -24,9 +24,32 @@ const MapWithNoSSR = dynamic(() => import('@components/Map'), {
 
 const useStyles = makeStyles((theme: Theme) => ({
   hero: {
+    display: 'flex',
     height: 'calc(100vh - 100px)',
     textAlign: 'left',
     padding: theme.spacing(0, 12),
+    '&::before': {
+      content: '""',
+      backgroundImage: 'url(/static/resources/element6.svg)',
+      backgroundRepeat: 'repeat-y',
+      backgroundSize: 380,
+      backgroundPosition: 'right top',
+      display: 'block',
+      width: '98%',
+      height: '111%',
+      zIndex: '5',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      opacity: 0.11,
+    },
+  },
+  heroIcons: {
+    width: '100%',
+    display: 'flex',
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
     width: '100%',
@@ -173,6 +196,41 @@ const HomePage: NextPage = () => {
         <Typography variant={'h1'} className={styles.title} color={'secondary'}>
           Retrouvez tous les commerçants près de chez vous
         </Typography>
+        <div className={styles.heroIcons}>
+          <img
+            src={'/static/logo.svg'}
+            alt={'elem1'}
+            style={{
+              width: 536,
+              position: 'absolute',
+              top: '66%',
+              transform: 'translateY(-100%)',
+              left: '-37%',
+            }}
+          />
+          <img
+            src={'/static/resources/element8.svg'}
+            alt={'elem2'}
+            style={{
+              width: 294,
+              position: 'absolute',
+              top: '95%',
+              transform: 'translateY(-100%)',
+              left: '62%',
+            }}
+          />
+          <img
+            src={'/static/resources/element10.svg'}
+            alt={'elem3'}
+            style={{
+              width: 269,
+              position: 'absolute',
+              top: '95%',
+              transform: 'translateY(-100%)',
+              left: '45%',
+            }}
+          />
+        </div>
       </Section>
 
       <Section id={'labels'} className={styles.section} color={'white'}>
