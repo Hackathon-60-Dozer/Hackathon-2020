@@ -147,19 +147,19 @@ const Index: NextPage = () => {
   const labels: Label[] = [
     {
       name: 'Potimaron',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://cuisine-saine.fr/wp-content/uploads/2014/03/courge-butternut.jpg',
     },
     {
       name: 'Poisson',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://media.gerbeaud.net/2019/11/640/amphiprion-ocellaris-poisson-clown-pacifique.jpg',
     },
     {
       name: 'Courgette',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://media.gerbeaud.net/2019/11/640/amphiprion-ocellaris-poisson-clown-pacifique.jpg',
     },
     {
       name: 'Pomme de terre',
-      image: 'https://picsum.photos/530/200',
+      image: 'https://cdn4.fermedesaintemarthe.com/I-Autre-25748_1200x1200-pomme-de-terre-laurette-ab.net.jpg',
     },
   ];
 
@@ -168,12 +168,12 @@ const Index: NextPage = () => {
     <Layout maxWidth={"xl"} style={{width: "100%", padding: 0, margin: 0}}>
       <Section className={styles.hero} color={"white"}>
         <figure>
-          <img src="https://i.picsum.photos/id/9/536/354.jpg?hmac=5PiiV8cCMwZsDl8bYwpetFqtPuNn5uY2WcKTEb5ykW4" alt=""/>
+          <img src="https://northernlifemagazine.co.uk/wp-content/uploads/2019/08/Community-Shop-twitter.jpg" alt=""/>
         </figure>
 
         <div className={styles.secondHeroContainer}>
           <figure>
-            <img src="https://i.picsum.photos/id/9/536/354.jpg?hmac=5PiiV8cCMwZsDl8bYwpetFqtPuNn5uY2WcKTEb5ykW4" alt=""/>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSafcfc-8PuUquB4iS9Xtvy9oXursOo9AHZBg&usqp=CAU" alt=""/>
           </figure>
 
           <Typography variant={"h5"} color={"primary"} style={{marginTop: 20, fontWeight: "bold"}}>Bienvenue,</Typography>
@@ -269,9 +269,9 @@ const Index: NextPage = () => {
 
       </Section>
 
-      <Divider color={"grey"}/>
+      <Divider color={"grey"} margin={"30px"}/>
 
-      <Section style={{}}>
+      <Section style={{}} color={"white"}>
         <ul style={{listStyle: "none"}}>
           <li><Button>Historique des commandes</Button>
           <li><Button>Modifier les informations boutique</Button></li>

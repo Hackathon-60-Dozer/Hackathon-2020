@@ -46,7 +46,7 @@ const Index : NextPage = () => {
     <Layout maxWidth={"xl"} style={{padding: 0}} className={styles.root}>
       <div className={styles.hero}>
         <figure>
-          <img src="https://i.picsum.photos/id/9/536/354.jpg?hmac=5PiiV8cCMwZsDl8bYwpetFqtPuNn5uY2WcKTEb5ykW4" alt=""/>
+          <img src="https://www.lanouvelle.net/wp-content/uploads/sites/5/2017/11/ft-24032017-fruits-legumes-1024x678.jpg" alt=""/>
         </figure>
       </div>
 

@@ -114,7 +114,7 @@ const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <Grid item xs={6}>
             <figure className={styles.firstContainer}>
               <img
-                src="https://i.picsum.photos/id/9/536/354.jpg?hmac=5PiiV8cCMwZsDl8bYwpetFqtPuNn5uY2WcKTEb5ykW4"
+                src="https://northernlifemagazine.co.uk/wp-content/uploads/2019/08/Community-Shop-twitter.jpg"
                 alt=""
               />
             </figure>
@@ -172,7 +172,7 @@ const Product: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
               <CardActionArea>
                 <CardMedia
                   className={styles.cardMedia}
-                  image={'https://picsum.photos/150/100'}
+                  image={'https://fr.rc-cdn.community.thermomix.com/recipeimage/evs5k5in-21c05-024863-cfcd2-71r3w15i/ec37d89a-70b3-41c6-a5c1-cee9603cefb8/main/pain-du-boulanger.jpg'}
                   title={product.name}
                 />
                 <CardContent className={styles.cardContent}>
