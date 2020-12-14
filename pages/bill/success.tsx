@@ -107,8 +107,9 @@ const Success : NextPage = () => {
           <Typography variant={"h3"} color={"primary"}>19.85 €</Typography>
         </div>
 
-        <Typography variant={"body1"} color={"primary"} style={{textAlign: "center", fontSize: 17, margin: 50}}>Un doute sur un produit ? Consultez notre page sur les allergènes <a
-          href="">ici</a></Typography>
+        <Typography variant={"body1"} color={"primary"} style={{textAlign: "center", fontSize: 17, margin: 50}}>Un doute sur un produit ? Consultez notre page sur les allergènes <a href="">ici</a></Typography>
+
+        <Typography variant={"h2"} color={"secondary"} style={{textAlign: "center", fontSize: 17, margin: 50}}>Merci et à bientôt !</Typography>
       </div>
     </Layout>
   )
