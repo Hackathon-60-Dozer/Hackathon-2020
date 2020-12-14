@@ -1,9 +1,20 @@
 import React, { HTMLAttributes } from 'react';
 import Link from 'next/link';
 import { colors } from '@theme';
-import { makeStyles, Theme, Link as MUILink } from '@material-ui/core';
-import clsx from 'clsx';
-import { SearchBox } from 'react-instantsearch-dom';
+import {
+  makeStyles,
+  Theme,
+  Link as MUILink,
+  InputAdornment,
+} from '@material-ui/core';
+import routes from '@constants/routes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import dynamic from 'next/dynamic';
+
+const AddressField = dynamic(() => import('@components/Form/Field/Address'), {
+  ssr: false,
+});
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -15,12 +26,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-around',
     position: 'absolute',
     zIndex: theme.zIndex.appBar - 1,
+    flexDirection: 'row',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+
+      '& > *': {
+        marginBottom: theme.spacing(2),
+      },
+    },
   },
   navLink: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     fontSize: 25,
-    color: theme.palette.background.paper
-  }
+    color: theme.palette.background.paper,
+  },
 }));
 
 export type NavProps = HTMLAttributes<HTMLDivElement>;
@@ -30,15 +52,30 @@ const Nav: React.FC<NavProps> = ({ ...props }) => {
 
   return (
     <nav className={styles.root} {...props}>
-      <Link href={''} passHref>
+      <AddressField
+        placeholder={'Saisissez votre recherche'}
+        variant={'outlined'}
+        color={'primary'}
+        id={'address-search-input'}
+        name={'address-search-input'}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <FontAwesomeIcon icon={faSearch} />
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <Link href={routes.accountCommands.url} passHref>
         <MUILink className={styles.navLink}>Mes commandes</MUILink>
       </Link>
 
-      <Link href={''} passHref>
+      <Link href={routes.productList.url} passHref>
         <MUILink className={styles.navLink}>Liste des produits</MUILink>
       </Link>
 
-      <Link href={''} passHref>
+      <Link href={routes.shopList.url} passHref>
         <MUILink className={styles.navLink}>Liste des commerçant</MUILink>
       </Link>
     </nav>

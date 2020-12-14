@@ -37,6 +37,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     top: -100,
     paddingTop: 100,
+  },
+  heroLeft: {
+    width: '100%',
+    maxWidth: 850,
+  },
+  heroIcons: {
+    width: '100%',
+    display: 'flex',
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
     '&::before': {
       content: '""',
       backgroundImage: 'url(/static/resources/element6.svg)',
@@ -52,17 +63,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       left: 0,
       opacity: 0.11,
     },
-  },
-  heroLeft: {
-    width: '100%',
-    maxWidth: 850,
-  },
-  heroIcons: {
-    width: '100%',
-    display: 'flex',
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
   },
   section: {
     textAlign: 'center',
@@ -206,12 +209,13 @@ const HomePage: NextPage = () => {
           <Typography
             variant={'h1'}
             color={'secondary'}
-            style={{ marginBottom: 100 }}>
+            style={{ paddingTop: 20, marginBottom: 100, fontSize: '4vw' }}>
             Retrouvez tous les commerçants près de chez vous
           </Typography>
           <AddressField
             placeholder={'Saisissez votre recherche'}
             variant={'outlined'}
+            color={'primary'}
             id={'address-search-input'}
             name={'address-search-input'}
             style={{ width: '80%', marginRight: 20, marginBottom: 12 }}
@@ -232,7 +236,8 @@ const HomePage: NextPage = () => {
             src={'/static/logo.svg'}
             alt={'elem1'}
             style={{
-              width: 525,
+              width: '25vw',
+              zIndex: 8,
               position: 'absolute',
               top: '65%',
               transform: 'translateY(-100%)',
@@ -243,18 +248,20 @@ const HomePage: NextPage = () => {
             src={'/static/resources/element8.svg'}
             alt={'elem2'}
             style={{
-              width: 294,
+              width: '15vw',
+              zIndex: 6,
               position: 'absolute',
               top: '95%',
               transform: 'translateY(-100%)',
-              left: '62%',
+              left: '60%',
             }}
           />
           <img
             src={'/static/resources/element10.svg'}
             alt={'elem3'}
             style={{
-              width: 269,
+              width: '12vw',
+              zIndex: 7,
               position: 'absolute',
               top: '95%',
               transform: 'translateY(-100%)',

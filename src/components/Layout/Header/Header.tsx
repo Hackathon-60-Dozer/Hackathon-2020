@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: theme.zIndex.appBar,
     padding: theme.spacing(3, 10),
     backgroundColor: theme.palette.background.paper,
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(3, 4),
+    },
   },
   logo: {
     maxWidth: 200,
@@ -77,8 +80,14 @@ const transitionStyles = {
     transform: `translate3d(0, ${toolbarHeight}px, 0)`,
     paddingBottom: 45,
   },
-  exiting: { transform: `translate3d(0, 0, 0)`, paddingBottom: 20 },
-  exited: { transform: `translate3d(0, 0, 0)`, paddingBottom: 20 },
+  exiting: {
+    transform: `translate3d(0, calc(-100% - ${toolbarHeight}px), 0)`,
+    paddingBottom: 20,
+  },
+  exited: {
+    transform: `translate3d(0, calc(-100% - ${toolbarHeight}px), 0)`,
+    paddingBottom: 20,
+  },
 };
 
 const Header: React.FC = () => {

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import React from 'react';
 import { NextPage } from 'next';
 import Layout from '@components/Layout/Layout';
 import dynamic from 'next/dynamic';
@@ -9,15 +8,7 @@ const AlgoliaSearch = dynamic(() => import('@components/AlgoliaSearch'), {
   ssr: false,
 });
 
-const useStyles = makeStyles((theme: Theme) => ({}));
-
 const ProductList: NextPage = () => {
-  const [productList, setProductList] = useState({});
-
-  useEffect(() => {
-    //Récupération des données ici
-  }, []);
-
   return (
     <Layout>
       <AlgoliaSearch title={'Rechercher des produits'} />
