@@ -10,6 +10,8 @@
     "noImplicitAny": false,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "importHelpers": true,
     "strictNullChecks": false,
     "alwaysStrict": true,

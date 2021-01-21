@@ -1,16 +1,35 @@
-import { Schema } from 'mongoose';
+import {prop} from "@typegoose/typegoose";
 
-const AddressSchema = new Schema({
-  administrative: String,
-  city: String,
-  country: String,
-  countryCode: String,
-  county: String,
-  lat: Number,
-  lng: Number,
-  postcode: String,
-  postcodes: [String],
-  value: String,
-});
+class AddressSchema {
+  @prop()
+  public administrative?: string
+
+  @prop()
+  public city?: string
+
+  @prop()
+  public country?: string
+
+  @prop()
+  public countryCode?: string
+
+  @prop()
+  public county?: string
+
+  @prop()
+  public lat?: number
+
+  @prop()
+  public lng?: number
+
+  @prop()
+  public postcode?: string
+
+  @prop({ type: [String] })
+  public postcodes?: string[]
+
+  @prop()
+  public value?: string
+}
 
 export default AddressSchema;

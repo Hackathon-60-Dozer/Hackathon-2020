@@ -1,15 +1,24 @@
-import mongoose, { Schema } from 'mongoose';
-import { Model, User } from '@src/types';
+import {getModelForClass, prop, Ref} from "@typegoose/typegoose";
+import {ShopSchema} from "@src/models/Shop";
+import {Base} from "@typegoose/typegoose/lib/defaultClasses";
 
-const ShopSchema = new Schema(
-  {
-    _id: String,
-    uid: String,
-    firstName: String,
-    lastName: String,
-    shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
-  },
-  { _id: false }
-);
+export class UserSchema extends Base<string> {
+  @prop()
+  public _id!: string;
 
-export default mongoose.model('User', ShopSchema) as Model<User>;
+  @prop({ required: true, unique: true })
+  public uid!: string;
+
+  @prop()
+  public firstName?: string;
+
+  @prop()
+  public lastName?: string;
+
+  @prop({ ref: 'Shop' })
+  public shop?: Ref<ShopSchema>;
+}
+
+const User = getModelForClass(UserSchema, { schemaOptions: { _id: false } })
+
+export default User;

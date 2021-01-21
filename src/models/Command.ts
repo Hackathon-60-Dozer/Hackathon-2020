@@ -1,18 +1,38 @@
-import mongoose, { Schema } from 'mongoose';
-import { Command, Model } from '@src/types';
-import Product from '@src/models/Product';
+import {getModelForClass, prop, Ref} from "@typegoose/typegoose";
+import {UserSchema} from "@src/models/User";
+import ProductSchema from "@src/models/Product";
 
-const CommandSchema = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: 'User' },
-  products: [Product.schema],
-  collectDate: Date,
-  price: Number, // HT
-  paymentType: String, // en ligne ou sur place
-  meta: {
-    validated: Boolean,
-    collected: Boolean,
-    paid: Boolean,
-  },
-});
+export class CommandMetaSchema {
+  @prop()
+  public validated?: boolean;
 
-export default mongoose.model('Command', CommandSchema) as Model<Command>;
+  @prop()
+  public collected?: boolean;
+
+  @prop()
+  public paid?: boolean;
+}
+
+export class CommandSchema {
+  @prop({ ref: 'User '})
+  public user?: Ref<UserSchema>;
+
+  @prop({ _id: false })
+  public products?: ProductSchema[];
+
+  @prop()
+  public collectDate?: Date;
+
+  @prop()
+  public price?: number;
+
+  @prop()
+  public paymentType?: string;
+
+  @prop()
+  public meta?: CommandMetaSchema
+}
+
+const Command = getModelForClass(CommandSchema)
+
+export default Command;

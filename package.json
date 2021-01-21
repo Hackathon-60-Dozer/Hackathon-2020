@@ -26,6 +26,7 @@
     "@src": "dist"
   },
   "dependencies": {
+    "@typegoose/typegoose": "^7.4.8",
     "apollo-server-express": "^2.16.1",
     "bluebird": "^3.7.2",
     "cookie-parser": "^1.4.5",
@@ -35,7 +36,7 @@
     "graphql-tools": "^6.2.3",
     "joi": "^17.3.0",
     "module-alias": "^2.2.2",
-    "mongoose": "^5.10.0",
+    "mongoose": "^5.10.4",
     "mongoose-algolia": "^1.10.1",
     "node-fetch": "^2.6.0"
   },

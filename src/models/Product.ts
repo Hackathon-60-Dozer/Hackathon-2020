@@ -1,18 +1,37 @@
-import mongoose, { Schema } from 'mongoose';
-import { Model, Product } from '@src/types';
+import {prop} from "@typegoose/typegoose";
 
-const ProductSchema = new Schema({
-  name: String,
-  price: Number,
-  unit: String, // kilo / litre / pièce / lot
-  details: {
-    mode: [String], // consumptions modes
-    allergens: [String],
-    alcohol: Boolean,
-  },
-  meta: {
-    available: Boolean,
-  },
-});
+export class ProductDetailsSchema {
+  @prop({ type: [String] })
+  public mode?: string[];
 
-export default mongoose.model('Product', ProductSchema) as Model<Product>;
+  @prop({ type: [String] })
+  public allergens?: string[];
+
+  @prop()
+  public alcohol?: boolean;
+}
+
+export class ProductMetaSchema {
+  @prop()
+  public available?: boolean;
+
+}
+
+class ProductSchema {
+  @prop()
+  public name?: string;
+
+  @prop()
+  public price?: number;
+
+  @prop()
+  public unit?: string
+
+  @prop({ _id: false })
+  public details?: ProductDetailsSchema;
+
+  @prop({ _id: false })
+  public meta?: ProductMetaSchema;
+}
+
+export default ProductSchema
