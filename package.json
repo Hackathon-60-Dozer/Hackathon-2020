@@ -1,11 +1,22 @@
 {
   "name": "@toulocal/app",
+  "description": "Front-end application of Toulocal",
   "version": "0.1.0",
   "license": "GPL-3.0",
+  "contributors": [
+    "Benjamin Lepas <mail@octanium.fr> (https://octanium.fr)",
+    "Pierre Godino <pierregodino.contact@yahoo.com> (https://pierre-godino.com)"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "NODE_ENV=development next dev",
+    "build": "NODE_ENV=production next build",
+    "export": "NODE_ENV=production yarn build && next export",
+    "start": "NODE_ENV=production next start",
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch",
+    "test:coverage": "NODE_ENV=test jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@apollo/client": "^3.3.4",
@@ -40,7 +51,9 @@
     "yup": "^0.32.8"
   },
   "devDependencies": {
+    "@testing-library/react": "^11.2.3",
     "@types/brainhubeu__react-carousel": "^2.0.2",
+    "@types/jest": "^26.0.20",
     "@types/material-ui": "^0.21.8",
     "@types/next": "^9.0.0",
     "@types/node": "^14.14.7",
@@ -48,6 +61,7 @@
     "@types/react-dom": "^16.9.9",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
+    "babel-jest": "^26.6.3",
     "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^7.13.0",
     "eslint-config-prettier": "^6.15.0",
@@ -59,6 +73,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.6.3",
+    "jest-watch-typeahead": "^0.6.1",
     "prettier": "^2.1.2",
     "typescript": "^4.0.5"
   }

@@ -14,6 +14,7 @@ module.exports = {
     browser: true,
     es2020: true,
     node: true,
+    jest: true,
   },
   plugins: ['@typescript-eslint', 'import', 'react', 'react-hooks', 'jsx-a11y'],
   rules: {
