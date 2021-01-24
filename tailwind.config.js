@@ -21,9 +21,11 @@ module.exports = {
       'reddish-brown': 'var(--color-reddish-brown)',
       green: 'var(--color-green)',
       'light-transparent': 'var(--color-light-transparent)',
+      ...defaultTheme.colors,
     },
     boxShadow: {
       custom: '0px 2px 15px 0px rgba(0,0,0,0.1)',
+      ...defaultTheme.boxShadow,
     },
   },
   variants: {
