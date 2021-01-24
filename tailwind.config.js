@@ -5,7 +5,7 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+      sans: ['Poppins', 'Teko', ...defaultTheme.fontFamily.sans],
     },
     colors: {
       'darker-primary': 'var(--color-darker-primary)',
@@ -20,6 +20,9 @@ module.exports = {
       'reddish-brown': 'var(--color-reddish-brown)',
       green: 'var(--color-green)',
       'light-transparent': 'var(--color-light-transparent)',
+    },
+    boxShadow: {
+      custom: '0px 2px 15px 0px rgba(0,0,0,0.1)',
     },
   },
   variants: {
