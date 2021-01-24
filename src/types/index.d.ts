@@ -1,3 +1,17 @@
+export type Colors =
+  | 'darker-primary'
+  | 'primary'
+  | 'transparent-primary'
+  | 'secondary'
+  | 'light-secondary'
+  | 'dark-grey'
+  | 'light-grey'
+  | 'lighter-grey'
+  | 'lightest-grey'
+  | 'reddish-brown'
+  | 'green'
+  | 'light-transparent';
+
 export interface Session {
   id: string;
   email: string;

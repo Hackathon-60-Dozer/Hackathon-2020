@@ -1,10 +1,16 @@
 :root {
+  --color-darker-primary: #C73B18;
   --color-primary: #FD4A1E;
+  --color-transparent-primary : #FD4A1E6B;
   --color-secondary: #FFE0D8;
-  --color-background: #2C2B26;
-  --color-white: #FFFAF6;
-  --color-black: #351E1D;
-  --color-gray: #666666;
+  --color-light-secondary: #FFFAF6;
+  --color-dark-grey: #333333;
+  --color-light-grey: #666666;
+  --color-lighter-grey: #EAEAEA;
+  --color-lightest-grey: #FCFCFC;
+  --color-reddish-brown: #351E1D;
+  --color-green: #1DBF78;
+  --color-light-transparent: #F0F0F033;
 }
 
 @tailwind base;
