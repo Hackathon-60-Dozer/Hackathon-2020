@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['Poppins', ...defaultTheme.fontFamily.sans],
-      display: ['Teko', ...defaultTheme.fontFamily.display],
+      display: ['Teko'],
     },
     colors: {
       'darker-primary': 'var(--color-darker-primary)',
