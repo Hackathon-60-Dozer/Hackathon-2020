@@ -1,34 +1,25 @@
 import React from 'react';
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Button,
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
   Grid,
-  IconButton,
-  Link,
   makeStyles,
   Theme,
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
 import { NextPage } from 'next';
-import Layout from '@components/Layout/Layout';
-import {
-  faChevronDown,
-  faChevronRight,
-  faPen,
-} from '@fortawesome/free-solid-svg-icons';
+import Layout from '@src/components/Layout/Layout';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Divider from '@components/Divider';
-import Section from '@components/Section';
-import Chart from '@components/Chart';
+import Divider from '@src/components/Divider';
+import Section from '@src/components/Section';
+import Chart from '@src/components/Chart';
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
-import theme from '@theme';
+import theme from '@src/theme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},

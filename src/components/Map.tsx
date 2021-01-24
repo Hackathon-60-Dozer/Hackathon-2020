@@ -32,7 +32,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 //   }
 // }
 
-export default class MyMap extends Component {
+export default class MyMap extends Component<{ mapHeight: number }> {
   state = {
     center: {
       lat: 31.698956,

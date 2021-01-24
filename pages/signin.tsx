@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
-import Layout from '@components/Layout/Layout';
-import SignInForm from '@components/Form/SignIn';
+import Layout from '@src/components/Layout/Layout';
+import SignInForm from '@src/components/Form/SignIn';
 
 const SignInPage: NextPage = () => {
   return (

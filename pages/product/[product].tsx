@@ -5,7 +5,7 @@ import {
   InferGetStaticPropsType,
   NextPage,
 } from 'next';
-import Layout from '@components/Layout/Layout';
+import Layout from '@src/components/Layout/Layout';
 import {
   Button,
   IconButton,
@@ -14,12 +14,11 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core';
-import { Product } from '@types';
+import { Product } from '@src/types';
 import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Divider from '@components/Divider';
-import Section from '@components/Section';
-import { gql } from '@apollo/client';
+import Divider from '@src/components/Divider';
+import Section from '@src/components/Section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   imgContainer: {

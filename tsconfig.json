@@ -22,18 +22,13 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-      "@pages/*": [
-        "pages/*"
-      ],
-      "@*": [
-        "src/*"
-      ]
+      "@src/*": ["./src/*"]
     }
   },
   "exclude": [
     "node_modules",
     ".editorconfig",
-    ".env.local.dist",
+    ".env.dist",
     ".env.local"
   ],
   "include": [

@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Button,
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
   Grid,
-  GridList,
-  GridListTile,
   makeStyles,
   Theme,
   Typography,
-  useMediaQuery,
 } from '@material-ui/core';
 import {
   GetStaticPaths,
@@ -19,11 +15,11 @@ import {
   InferGetStaticPropsType,
   NextPage,
 } from 'next';
-import Layout from '@components/Layout/Layout';
+import Layout from '@src/components/Layout/Layout';
 import { gql } from '@apollo/client';
-import { initializeApollo } from '@services/apollo/client';
-import { Shop } from '@types';
-import Section from '@components/Section';
+import { initializeApollo } from '@src/services/apollo/client';
+import { Shop } from '@src/types';
+import Section from '@src/components/Section';
 import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme: Theme) => ({

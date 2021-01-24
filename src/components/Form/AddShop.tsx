@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useAuth } from '@hook/useAuth';
+import { useAuth } from '@src/hook/useAuth';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -21,8 +21,8 @@ import {
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import dynamic from 'next/dynamic';
-import { Address } from '@types';
-import { labels } from '@constants/shopLabels';
+import { Address } from '@src/types';
+import { labels } from '@src/constants/shopLabels';
 import { gql, useMutation } from '@apollo/client';
 
 const AddressField = dynamic(() => import('./Field/Address'), {
@@ -114,7 +114,7 @@ export const AddShopForm: React.FC = () => {
   const { session, account } = useAuth();
   const [error, setFormError] = useState<string>();
 
-  const [address, setAddress] = useState({});
+  const [address, setAddress] = useState<Record<string, any>>({});
   const {
     register,
     handleSubmit,
@@ -134,7 +134,6 @@ export const AddShopForm: React.FC = () => {
 
   const handleAddressChange = useCallback(
     (e: any, name: string) => {
-      // @ts-ignore
       const address: Address & Record<string, any> = e.suggestion;
 
       console.log(address);
@@ -161,18 +160,14 @@ export const AddShopForm: React.FC = () => {
 
   const onSubmit = useCallback(
     (values: FormData) => {
-      console.log({ values, address });
-
       schema.validate(values).then((values) => {
         addShop({
           variables: {
             input: {
               name: values.shopName,
-              // @ts-ignore
               address: parseAddress(address.address),
               organisationName: values.orgName,
               organisationSiret: values.siret,
-              // @ts-ignore
               organisationSiege: parseAddress(address.siegeAddress),
               labels: values.labels,
             },

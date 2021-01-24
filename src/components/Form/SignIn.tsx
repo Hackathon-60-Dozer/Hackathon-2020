@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import firebaseui from 'firebaseui';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/app';
-import { initializeFirebase } from '@services/firebase/client';
-import { useAuth } from '@hook/useAuth';
+import { initializeFirebase } from '@src/services/firebase/client';
+import { useAuth } from '@src/hook/useAuth';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import translations from '@translations';
+import translations from '@src/translations';
 import {
   Button,
   TextField,
@@ -20,7 +20,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import routes from '@constants/routes';
+import routes from '@src/constants/routes';
 
 initializeFirebase();
 const uiConfig: firebaseui.auth.Config = {

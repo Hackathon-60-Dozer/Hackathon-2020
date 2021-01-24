@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import {
   Button,
   Input,
-  Link as MUILink,
   makeStyles,
   Theme,
   Typography,
 } from '@material-ui/core';
 import { NextPage } from 'next';
-import Layout from '@components/Layout/Layout';
-import Section from '@components/Section';
+import Layout from '@src/components/Layout/Layout';
+import Section from '@src/components/Section';
 import Link from 'next/link';
-import routes from '@constants/routes';
+import routes from '@src/constants/routes';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},

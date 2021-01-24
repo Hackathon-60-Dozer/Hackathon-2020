@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import { initializeApollo } from '@services/apollo/client';
+import { initializeApollo } from '@src/services/apollo/client';
 
 export function useApollo(
   state?: NormalizedCacheObject

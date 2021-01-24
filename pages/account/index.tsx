@@ -9,15 +9,15 @@ import {
   Typography,
 } from '@material-ui/core';
 import { NextPage } from 'next';
-import Layout from '@components/Layout/Layout';
+import Layout from '@src/components/Layout/Layout';
 import {
   faChevronDown,
   faChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Divider from '@components/Divider';
-import routes from '@constants/routes';
-import { useAuth } from '@hook/useAuth';
+import Divider from '@src/components/Divider';
+import routes from '@src/constants/routes';
+import { useAuth } from '@src/hook/useAuth';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},

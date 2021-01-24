@@ -1,10 +1,10 @@
 import React from 'react';
 import { AppProps } from 'next/app';
-import AuthProvider from '@context/auth';
+import AuthProvider from '@src/context/auth';
 import { ApolloProvider } from '@apollo/client';
-import { APOLLO_STATE_PROP_NAME } from '@services/apollo/client';
-import { useApollo } from '@hook/useApollo';
-import theme from '@theme';
+import { APOLLO_STATE_PROP_NAME } from '@src/services/apollo/client';
+import { useApollo } from '@src/hook/useApollo';
+import theme from '@src/theme';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
 

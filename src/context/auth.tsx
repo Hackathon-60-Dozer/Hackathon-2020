@@ -6,10 +6,10 @@ import {
   mapUserData,
   removeUserCookie,
   setUserCookie,
-} from '@helpers/auth';
-import { Session, Account } from '@types';
-import { initializeFirebase } from '@services/firebase/client';
-import { setToken } from '@services/apollo/client';
+} from '@src/helpers/auth';
+import { Session, Account } from '@src/types';
+import { initializeFirebase } from '@src/services/firebase/client';
+import { setToken } from '@src/services/apollo/client';
 import { gql, useLazyQuery } from '@apollo/client';
 
 initializeFirebase();
@@ -75,7 +75,7 @@ export const useAuthProvider = (): AuthContext => {
   }, [logout]);
 
   useEffect(() => {
-    if (!!session) {
+    if (session) {
       fetchViewer();
     }
   }, [fetchViewer, session]);

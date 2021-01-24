@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  Button,
-  makeStyles,
-  Theme,
-  Typography,
-  Link as MUILink,
-} from '@material-ui/core';
+import { Button, makeStyles, Theme, Typography } from '@material-ui/core';
 import { NextPage } from 'next';
-import Layout from '@components/Layout/Layout';
-import Section from '@components/Section';
-import routes from '@constants/routes';
+import Layout from '@src/components/Layout/Layout';
+import Section from '@src/components/Section';
+import routes from '@src/constants/routes';
 import Link from 'next/link';
 
 const useStyles = makeStyles((theme: Theme) => ({

@@ -1,20 +1,23 @@
 import React, { HTMLAttributes } from 'react';
 import Link from 'next/link';
-import { colors } from '@theme';
+import { colors } from '@src/theme';
 import {
   makeStyles,
   Theme,
   Link as MUILink,
   InputAdornment,
 } from '@material-ui/core';
-import routes from '@constants/routes';
+import routes from '@src/constants/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import dynamic from 'next/dynamic';
 
-const AddressField = dynamic(() => import('@components/Form/Field/Address'), {
-  ssr: false,
-});
+const AddressField = dynamic(
+  () => import('@src/components/Form/Field/Address'),
+  {
+    ssr: false,
+  }
+);
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

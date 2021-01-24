@@ -1,5 +1,5 @@
 import cookies from 'js-cookie';
-import { Session } from '@types';
+import { Session } from '@src/types/index';
 
 export const mapUserData = (user: Record<string, any>): Session => {
   const { uid, email, xa, ya } = user;

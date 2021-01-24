@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { NextPage } from 'next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import Layout from '@components/Layout/Layout';
-import { inspect } from 'util';
+import Layout from '@src/components/Layout/Layout';
 import {
   makeStyles,
   Typography,
@@ -16,9 +14,9 @@ import {
   CardMedia,
   CardContent,
 } from '@material-ui/core';
-import Section from '@components/Section';
-import Divider from '@components/Divider';
-import theme, { colors } from '@theme';
+import Section from '@src/components/Section';
+import Divider from '@src/components/Divider';
+import theme from '@src/theme';
 import { useRouter } from 'next/router';
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
 

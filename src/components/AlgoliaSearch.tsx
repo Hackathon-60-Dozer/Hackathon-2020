@@ -3,15 +3,12 @@ import {
   Hits,
   Pagination,
   Highlight,
-  ClearRefinements,
   RefinementList,
   Configure,
   connectSearchBox,
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch/lite';
-import { InputAdornment, TextField, Typography } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding } from '@fortawesome/free-solid-svg-icons';
+import { TextField, Typography } from '@material-ui/core';
 import React from 'react';
 
 const searchClient = algoliasearch(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
-import Layout from '@components/Layout/Layout';
+import Layout from '@src/components/Layout/Layout';
 import {
   Button,
   Card,
@@ -14,22 +14,24 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-  Link as MUILink,
 } from '@material-ui/core';
 import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
 import dynamic from 'next/dynamic';
-import Section from '@components/Section';
+import Section from '@src/components/Section';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import routes from '@constants/routes';
+import routes from '@src/constants/routes';
 import Link from 'next/link';
 
-const MapWithNoSSR = dynamic(() => import('@components/Map'), {
+const MapWithNoSSR = dynamic(() => import('@src/components/Map'), {
   ssr: false,
 });
-const AddressField = dynamic(() => import('@components/Form/Field/Address'), {
-  ssr: false,
-});
+const AddressField = dynamic(
+  () => import('@src/components/Form/Field/Address'),
+  {
+    ssr: false,
+  }
+);
 
 const useStyles = makeStyles((theme: Theme) => ({
   hero: {
@@ -214,7 +216,6 @@ const HomePage: NextPage = () => {
     },
   ];
 
-  // @ts-ignore
   return (
     <Layout disabledContainer>
       <Section id={'hero'} className={styles.hero} color={'grey'} disableCrop>
@@ -346,10 +347,7 @@ const HomePage: NextPage = () => {
           Les commerçants prêt de chez vous
         </Typography>
         <Paper className={styles.map} elevation={3}>
-          <MapWithNoSSR
-            // @ts-ignore
-            mapHeight={300}
-          />
+          <MapWithNoSSR mapHeight={300} />
         </Paper>
       </Section>
 

@@ -1,15 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
-import Footer from '@components/Layout/Footer/Footer';
-import Header from '@components/Layout/Header/Header';
+import Footer from '@src/components/Layout/Footer/Footer';
+import Header from '@src/components/Layout/Header/Header';
 
 import {
   Container,
   ContainerProps,
   makeStyles,
-  Slide,
   Theme,
-  useScrollTrigger,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({

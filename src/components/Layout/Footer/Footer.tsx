@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import routes from '@constants/routes';
+import routes from '@src/constants/routes';
 import {
   makeStyles,
   Theme,

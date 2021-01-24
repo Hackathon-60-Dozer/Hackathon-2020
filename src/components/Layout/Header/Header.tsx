@@ -10,10 +10,10 @@ import {
   useScrollTrigger,
   Slide,
 } from '@material-ui/core';
-import Nav from '@components/Layout/Header/Nav';
+import Nav from '@src/components/Layout/Header/Nav';
 import Link from 'next/link';
-import routes from '@constants/routes';
-import { useAuth } from '@hook/useAuth';
+import routes from '@src/constants/routes';
+import { useAuth } from '@src/hook/useAuth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
