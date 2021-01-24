@@ -5,7 +5,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      sans: ['Poppins', 'Teko', ...defaultTheme.fontFamily.sans],
+      sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+      display: ['Teko', ...defaultTheme.fontFamily.display],
     },
     colors: {
       'darker-primary': 'var(--color-darker-primary)',
