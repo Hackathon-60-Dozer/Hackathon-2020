@@ -15,6 +15,13 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
     <ApolloProvider client={apolloClient}>
       <AuthProvider>
         <Component {...pageProps} />
+        <style jsx global>{`
+          html,
+          body,
+          #__next {
+            height: 100%;
+          }
+        `}</style>
       </AuthProvider>
     </ApolloProvider>
   );

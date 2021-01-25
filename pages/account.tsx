@@ -5,8 +5,7 @@ import Layout from '@src/components/Layout/Layout';
 const HomePage: NextPage = () => {
   return (
     <Layout>
-      <h1 className="font-bold text-base text-2xl text-primary">Toulocal</h1>
-      <button className="btn-small btn-gray ">Cliquez ici</button>
+      <h1 className="font-bold text-base text-2xl text-primary">Profil</h1>
     </Layout>
   );
 };

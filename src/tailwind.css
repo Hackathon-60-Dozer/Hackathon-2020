@@ -16,3 +16,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .icon-btn {
+    @apply rounded-full flex items-center text-sm p-3 transition duration-150 focus:outline-none;
+  }
+  .icon-btn svg {
+    @apply w-6 h-6;
+  }
+
+  .btn {
+    @apply font-sans rounded-full transition duration-150 focus:outline-none focus:ring-4 focus:ring-opacity-75   text-2xl py-3 px-11 text-2xl font-extrabold;
+  }
+  .btn-small {
+    @apply font-sans rounded-full transition duration-150 focus:outline-none focus:ring-4 focus:ring-opacity-75   text-base py-2 px-6 font-bold;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-darker-primary focus:ring-transparent-primary;
+  }
+  .btn-secondary {
+    @apply bg-secondary text-primary hover:bg-primary hover:text-secondary focus:ring-light-secondary;
+  }
+  .btn-gray {
+    @apply bg-lighter-grey text-reddish-brown hover:bg-reddish-brown hover:text-lighter-grey focus:ring-lightest-grey;
+  }
+}
