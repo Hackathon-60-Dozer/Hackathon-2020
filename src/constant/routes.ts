@@ -16,7 +16,7 @@ const routes = {
     title: 'Mention Legales',
   },
   account: {
-    url: '/',
+    url: '/account',
     title: 'Mon compte',
   },
   shops: {
@@ -24,9 +24,20 @@ const routes = {
     title: 'Commerces',
   },
   dashboard: {
-    url: '/',
+    url: '/dashboard',
     title: 'Espace commerçant',
   },
 };
+
+export const routesByUrl = Object.entries(routes).reduce(
+  (acc, [key, { url, ...route }]) => ({
+    ...acc,
+    [url]: {
+      key,
+      ...route,
+    },
+  }),
+  {}
+);
 
 export default routes;
