@@ -16,14 +16,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  plugins: [
-    '@typescript-eslint',
-    'import',
-    'simple-import-sort',
-    'react',
-    'react-hooks',
-    'jsx-a11y',
-  ],
+  plugins: ['@typescript-eslint', 'import', 'react', 'react-hooks', 'jsx-a11y'],
 
   rules: {
     'no-console': 0,
