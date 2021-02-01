@@ -184,7 +184,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       <main className="min-h-full">{children}</main>
 
-      <footer className="bg-reddish-brown text-light-secondary rounded-tl-3xl rounded-tr-3xl py-8 px-16 md:py-16 md:px-32">
+      <footer className="-mt-6 bg-reddish-brown text-light-secondary rounded-tl-3xl rounded-tr-3xl py-8 px-16 md:py-16 md:px-32">
         <div className="flex flex-col-reverse md:flex-row justify-between">
           <div className="text-left mt-5 md:mt-0">
             <h3 className="font-display text-2xl tracking-wide">
