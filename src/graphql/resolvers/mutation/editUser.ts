@@ -10,7 +10,7 @@ const schema = Joi.object({
 });
 
 export const editUser: Resolver<
-  boolean,
+  void,
   { input: AddUserInfoInput; uid?: string }
 > = async (_, { input, uid }, ctx) => {
   const { value, error } = schema.validate(input);

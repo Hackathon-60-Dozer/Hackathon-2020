@@ -12,7 +12,7 @@ const schema = Joi.object({
   plainPassword: Joi.string().required().min(6),
 });
 
-export const signUp: Resolver<boolean, { input: SignUpInput }> = async (
+export const signUp: Resolver<void, { input: SignUpInput }> = async (
   _,
   { input }
 ) => {
