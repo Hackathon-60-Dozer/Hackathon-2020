@@ -3,7 +3,7 @@ import { Resolver } from '@src/types';
 import Joi from 'joi';
 import { ShopInput } from '@src/types/inputs';
 import { addressValidationSchema } from '@src/helpers/schemas';
-import Shop from '@src/models/Shop';
+import { ShopRequest } from '@src/models/Shop';
 import User from '@src/models/User';
 
 const schema = Joi.object({
@@ -38,10 +38,6 @@ export const addShop: Resolver<void, { input: ShopInput }> = async (
   { input },
   ctx
 ) => {
-  if (!ctx.session) {
-    throw new ApolloError('Vous devez être connecté');
-  }
-
   let user;
   try {
     user = await User.findById(ctx.session.uid);
@@ -70,7 +66,7 @@ export const addShop: Resolver<void, { input: ShopInput }> = async (
     throw new ApolloError(error.message, 'BadRequest');
   }
 
-  const shop = new Shop({
+  const shop = new ShopRequest({
     ...values,
     organisation: {
       name: organisationName,

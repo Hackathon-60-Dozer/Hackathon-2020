@@ -7,7 +7,7 @@ import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
-import { apolloConfig } from '@src/graphql/schema';
+import { apolloConfig } from './graphql/schema';
 import * as config from './config';
 import admin from 'firebase-admin';
 import serviceAccount from './config/firebase-credential.json';

@@ -1,4 +1,5 @@
 import mongoose, { Document, SchemaTimestampsConfig } from 'mongoose';
+import admin from 'firebase-admin';
 
 export interface MongooseAlgoliaSettings {
   appId: string;
@@ -38,7 +39,10 @@ export type Model<T> = mongoose.Model<
 export type Resolver<R = any, T = any> = (
   parent: any,
   args: T,
-  ctx: any
+  ctx: {
+    session?: admin.auth.DecodedIdToken;
+    [p: string]: any;
+  }
 ) => Promise<R>;
 
 export interface Address {
@@ -64,7 +68,7 @@ export interface User {
   shop?: Ref<Shop>;
 }
 
-export type Label = string; /** Food typr label */
+export type Label = string; /** Food type label */
 export interface Shop {
   name: string;
   organisation: {

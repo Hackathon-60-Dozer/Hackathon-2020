@@ -1,9 +1,8 @@
-import {User} from '@src/types';
 import ProductSchema from '@src/models/Product';
-import {CommandSchema} from '@src/models/Command';
+import { CommandSchema } from '@src/models/Command';
 import AddressSchema from '@src/models/Address';
-import {getModelForClass, prop, Ref} from "@typegoose/typegoose";
-import {UserSchema} from "@src/models/User";
+import { getModelForClass, prop, Ref } from '@typegoose/typegoose';
+import { UserSchema } from '@src/models/User';
 
 export class OrganisationSchema {
   @prop()
@@ -26,10 +25,10 @@ export class ShopSchema {
   public name?: string;
 
   @prop({ _id: false })
-  public address?: AddressSchema
+  public address?: AddressSchema;
 
   @prop({ _id: false })
-  public organisation?: OrganisationSchema
+  public organisation?: OrganisationSchema;
 
   @prop({ ref: 'User' })
   public owner?: Ref<UserSchema>;
@@ -38,7 +37,7 @@ export class ShopSchema {
   public products?: ProductSchema[];
 
   @prop({ ref: 'Command' })
-  public commands?: Ref<CommandSchema>
+  public commands?: Ref<CommandSchema>;
 
   @prop({ type: [String] })
   public labels?: string[];
@@ -47,7 +46,10 @@ export class ShopSchema {
   public meta?: ShopMetaSchema;
 }
 
+const Shop = getModelForClass(ShopSchema);
 
-const Shop = getModelForClass(ShopSchema)
+export const ShopRequest = getModelForClass(ShopSchema, {
+  schemaOptions: { collection: 'requests' },
+});
 
 export default Shop;

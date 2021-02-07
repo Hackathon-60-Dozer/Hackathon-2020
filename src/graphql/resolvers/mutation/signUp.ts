@@ -2,7 +2,7 @@ import { ApolloError } from 'apollo-server-express';
 import { Resolver } from '@src/types';
 import Joi from 'joi';
 import admin from 'firebase-admin';
-import { AddUserInfoInput, SignUpInput } from '@src/types/inputs';
+import { SignUpInput } from '@src/types/inputs';
 import User from '@src/models/User';
 
 const schema = Joi.object({
@@ -38,6 +38,8 @@ export const signUp: Resolver<boolean, { input: SignUpInput }> = async (
     throw new ApolloError(e.message, e.code);
   }
 
+  // admin.auth().setCustomUserClaims(firebaseUser.uid, value);
+
   const user = new User({
     ...value,
     uid: firebaseUser.uid,
@@ -47,34 +49,5 @@ export const signUp: Resolver<boolean, { input: SignUpInput }> = async (
     if (err) throw err;
   });
 
-  return true;
-};
-
-const addInfoSchema = Joi.object({
-  firstName: Joi.string().required(),
-  lastName: Joi.string(),
-});
-
-export const addUserInfo: Resolver<
-  boolean,
-  { input: AddUserInfoInput }
-> = async (_, { input }, ctx) => {
-  const { value, error } = addInfoSchema.validate(input);
-
-  console.log(ctx.session);
-
-  if (error) {
-    throw new ApolloError(error.message, 'BadRequest');
-  }
-
-  const user = new User({
-    ...value,
-    uid: ctx.session.uid,
-  });
-  user._id = ctx.session.uid;
-  await user.save((err) => {
-    if (err) throw err;
-  });
-
-  return true;
+  return;
 };

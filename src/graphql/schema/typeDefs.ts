@@ -1,6 +1,11 @@
 import gql from 'graphql-tag';
 
 export const typeDefs = gql`
+  "Authorization"
+  directive @auth(
+    admin: Boolean
+  ) on OBJECT | FIELD_DEFINITION | ARGUMENT_DEFINITION | INPUT_FIELD_DEFINITION
+
   #    Scalars
   scalar Date
   scalar Time
@@ -59,8 +64,8 @@ export const typeDefs = gql`
     hours: JSONObject!
     labels: [String]!
     products: [Product]!
-    commands: [Command]!
-    owner(_: String): Account!
+    commands: [Command]! @auth
+    owner(_: String): Account! @auth(admin: true)
     meta: ShopMeta!
   }
   input ShopInput {
@@ -109,7 +114,7 @@ export const typeDefs = gql`
     plainPassword: String!
   }
 
-  input AddUserInfoInput {
+  input EditUserInput {
     firstName: String!
     lastName: String
   }
@@ -117,20 +122,66 @@ export const typeDefs = gql`
   type Account {
     firstName: String!
     lastName: String
+    email: EmailAddress @auth(admin: true)
   }
 
   type Query {
     getAllShops: [ID]!
     getShop(id: ID!): Shop
 
+    getAllShopRequests: [ID]! @auth(admin: true)
+    getShopRequest(shop: ID!): Shop! @auth(admin: true)
+
     viewer: Account
   }
 
   type Mutation {
-    addShop(input: ShopInput!): Void
-    addProduct(market: ID!, input: ShopInput!): Void
+    """
+    Create a new shop request if the current user does not already own a shop.
+    Admins will first need to validate the shop before being publicated.
+    """
+    addShop(input: ShopInput!): Void @auth
+    """
+    Edit the current shop data.
+    Admin can edit any shop they want.
+
+    *The current user need to own a shop.*
+    """
+    editShop(input: ShopInput!, shop: ID @auth(admin: true)): Void @auth
+    """
+    Remove the current shop.
+    Admin can edit any shop they want.
+
+    If no token given, an email will be sent to the shop owner with the token.
+
+    *The current user need to own a shop.*
+    """
+    removeShop(token: String, shop: ID @auth(admin: true)): Void @auth
+
+    "Add a product to the current shop."
+    addProduct(shop: ID!, input: ShopInput!): Void @auth
+    """
+    "Edit a product from the current shop.
+    Admin can edit any product they want.
+
+    *The current user need to own a shop.*
+    """
+    editProduct(
+      product: ID!
+      input: ShopInput!
+      shop: ID @auth(admin: true)
+    ): Void @auth
+    """
+    Remove a product from the current shop.
+    Admin can remove any product they want.
+
+    *The current user need to own a shop.*
+    """
+    removeProduct(product: ID!, shop: ID @auth(admin: true)): Void @auth
 
     signUp(input: SignUpInput!): Boolean!
-    addUserInfo(input: AddUserInfoInput!): Boolean!
+    editUser(input: EditUserInput!, uid: ID @auth(admin: true)): Void! @auth
+
+    processShopRequest(shop: ID!, validate: Boolean!): Void @auth(admin: true)
   }
 `;
